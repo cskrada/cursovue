@@ -1,11 +1,12 @@
     @extends('principal')
     @section('contenido')
         <template v-if="menu==0">
-            <example-component></example-component>
+            <h2>Contenido del menu = 0</h2>
         </template>
 
         <template v-if="menu==1">
-            <h2>Contenido de menu Almacen/categorias</h2>
+            <category></category>
+            {{-- nuestro componente category app.js --}}
         </template>
 
         <template v-if="menu==2">
