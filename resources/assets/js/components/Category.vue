@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Categorías
-                        <button type="button" class="btn btn-secondary">
+                        <button type="button" @click="openmodal('category','register')" class="btn btn-secondary">
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                     </div>
@@ -42,7 +42,7 @@
                                     tabla dinamica-->
                                 <tr v-for="category in arrayCategory" :key="category.id">
                                     <td>
-                                        <button type="button" class="btn btn-warning btn-sm">
+                                        <button type="button" @click="openmodal('category','update',category)" class="btn btn-warning btn-sm">
                                           <i class="icon-pencil"></i>
                                         </button> &nbsp;
                                         <button type="button" class="btn btn-danger btn-sm">
@@ -91,12 +91,12 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal agregar/actualizar-->
-            <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" v-bind:class="{'show' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Agregar categoría</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h4 class="modal-title" v-text="titlemodal"></h4>
+                            <button type="button" class="close" @click="closemodal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -105,21 +105,22 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre de categoría">
+                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre de categoría">
                                         <span class="help-block">(*) Ingrese el nombre de la categoría</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
                                     <div class="col-md-9">
-                                        <input type="email" id="descripcion" name="descripcion" class="form-control" placeholder="Enter Email">
+                                        <input type="email" v-model="description" class="form-control" placeholder="Enter Email">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" @click="closemodal()">Cerrar</button>
+                            <button type="button" v-if="typeaction==1" class="btn btn-primary">Guardar</button>
+                            <button type="button" v-if="typeaction==2" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -157,9 +158,12 @@
     export default {
         data (){
             return{
-                name:'',
-                description:'',
-                arrayCategory : []
+                name :'',
+                description :'',
+                arrayCategory : [],
+                modal : 0,
+                titlemodal : '',
+                typeaction : 0
             }
         },
         methods : {
@@ -174,10 +178,52 @@
             },
             registerCategory(){
 
+            },
+            closemodal(){
+                this.modal=0;
+                this.titlemodal='';
+                this.name='';
+                this.description='';
+            },
+            // se crea un metodo de abrir modal donde se le pasa tres parametros
+            openmodal(modelo, accion, data = []){
+                switch(modelo){
+                    case "category":
+                    {
+                        switch(accion){
+                            case "register":
+                            {
+                                this.modal = 1;
+                                this.titlemodal = "Registrar Categoria";
+                                this.name = '';
+                                this.description = '';
+                                this.typeaction = 1;
+                                break;
+                            }
+                            case "update":
+                            {
+
+                            }
+                        }
+                    }
+                }
             }
+
         },
         mounted() {
             this.listCategory();
         }
     }
 </script>
+<style type="text/css">
+    .modal-content{
+        width: 100% !important;
+        position: absolute !important; 
+    }
+    .show{
+        display: list-item !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        background-color: #3c29297a !important;
+    }
+</style>
