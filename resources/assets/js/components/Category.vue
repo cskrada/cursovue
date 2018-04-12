@@ -163,7 +163,9 @@
                 arrayCategory : [],
                 modal : 0,
                 titlemodal : '',
-                typeaction : 0
+                typeaction : 0,
+                errorCategory : 0,
+                errorShowMssgCategory :
             }
         },
         methods : {
