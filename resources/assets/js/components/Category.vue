@@ -52,7 +52,7 @@
                                         </template>
                                         <template v-else>
                                             <button type="button" class="btn btn-info btn-sm" @click="activeCategory(category.id)">
-                                                <i class="icon-ok"></i>
+                                                <i class="icon-check"></i>
                                             </button>
                                         </template>
                                     </td>
@@ -208,36 +208,85 @@
                     console.log(error);
                 });
             },
-            desactiveCategory(){
+            desactiveCategory(id){
                 swal({
-                      title: 'Are you sure?',
+                      title: 'Esta seguro de desactivar esta categoria',
                       text: "You won't be able to revert this!",
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
                       cancelButtonColor: '#d33',
-                      confirmButtonText: 'Yes, delete it!',
-                      cancelButtonText: 'No, cancel!',
+                      confirmButtonText: 'Aceptar',
+                      cancelButtonText: 'Cancelar',
                       confirmButtonClass: 'btn btn-success',
                       cancelButtonClass: 'btn btn-danger',
                       buttonsStyling: false,
                       reverseButtons: true
                     }).then((result) => {
                       if (result.value) {
-                        swal(
-                          'Deleted!',
-                          'Your file has been deleted.',
-                          'success'
-                        )
+
+                        let me = this;
+
+                            axios.put('/category/desactivar', {
+                                'id': id
+                            }).then(function (response) {
+                                me.listCategory();
+                                swal(
+                                    'Desactivado',
+                                    'El registro ha sido desactivado con exito.',
+                                    'success'
+                                    )
+                            }).catch(function(error)
+                            {
+                                console.log(error);
+                            });
+                        
                       } else if (
                         // Read more about handling dismissals
                         result.dismiss === swal.DismissReason.cancel
                       ) {
-                        swal(
-                          'Cancelled',
-                          'Your imaginary file is safe :)',
-                          'error'
-                        )
+                       
+                      }
+                    })
+            },
+            activeCategory(id){
+                swal({
+                      title: 'Esta seguro de desactivar esta categoria',
+                      text: "You won't be able to revert this!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Aceptar',
+                      cancelButtonText: 'Cancelar',
+                      confirmButtonClass: 'btn btn-success',
+                      cancelButtonClass: 'btn btn-danger',
+                      buttonsStyling: false,
+                      reverseButtons: true
+                    }).then((result) => {
+                      if (result.value) {
+
+                        let me = this;
+
+                            axios.put('/category/desactivar', {
+                                'id': id
+                            }).then(function (response) {
+                                me.listCategory();
+                                swal(
+                                    'Desactivado',
+                                    'El registro ha sido desactivado con exito.',
+                                    'success'
+                                    )
+                            }).catch(function(error)
+                            {
+                                console.log(error);
+                            });
+                        
+                      } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                      ) {
+                       
                       }
                     })
             },

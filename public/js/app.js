@@ -33448,23 +33448,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        desactiveCategory: function desactiveCategory() {
+        desactiveCategory: function desactiveCategory(id) {
+            var _this = this;
+
             swal({
-                title: 'Are you sure?',
+                title: 'Esta seguro de desactivar esta categoria',
                 text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false,
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    swal('Deleted!', 'Your file has been deleted.', 'success');
+
+                    var me = _this;
+
+                    axios.put('/category/desactivar', {
+                        'id': id
+                    }).then(function (response) {
+                        me.listCategory();
+                        swal('Desactivado', 'El registro ha sido desactivado con exito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                 } else if (
                 // Read more about handling dismissals
                 result.dismiss === swal.DismissReason.cancel) {
