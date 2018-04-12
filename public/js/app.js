@@ -33407,6 +33407,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            category_id: 0,
             name: '',
             description: '',
             arrayCategory: [],
@@ -33437,6 +33438,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/category/registrar', {
                 'name': this.name,
                 'description': this.description
+            }).then(function (response) {
+                me.closemodal();
+                me.listCategory();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        updateCategory: function updateCategory() {
+            if (this.validateCategory()) {
+                return;
+            }
+
+            var me = this;
+
+            axios.put('/category/actualizar', {
+                'name': this.name,
+                'description': this.description,
+                'id': this.category_id
             }).then(function (response) {
                 me.closemodal();
                 me.listCategory();
@@ -33483,6 +33502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.modal = 1;
                                     this.titlemodal = "Actualizar Categoria";
                                     this.typeaction = 2;
+                                    this.category_id = data['id'];
                                     this.name = data['name'];
                                     this.description = data['description'];
                                     break;
@@ -33795,7 +33815,12 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-primary",
-                        attrs: { type: "button" }
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.updateCategory()
+                          }
+                        }
                       },
                       [_vm._v("Actualizar")]
                     )
