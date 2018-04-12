@@ -235,7 +235,13 @@
                             }
                             case "update":
                             {
-
+                                //console.log(data);
+                                this.modal=1;
+                                this.titlemodal="Actualizar Categoria";
+                                this.typeaction=2;
+                                this.name = data ['name'];
+                                this.description = data ['description'];
+                                break;
                             }
                         }
                     }
