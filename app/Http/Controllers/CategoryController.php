@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
 use App\Category;
 
 class CategoryController extends Controller
 {
     //
     public function index (Request $request){
-        if (!$request->ajax()) return redirect('/');
-    	$categories = Category::all();
-    	return $categories;
+        // if (!$request->ajax()) return redirect('/');
+    	$categories =  Category::paginate(2);
+    	return [
+        'pagination' => [
+            'total'         => $categories->total(),
+            'current_page'  => $categories->current_page(),
+            'per_page'      => $categories->per_page(),
+            'last_page'     => $categories->last_page(),
+            'from'          => $categories->from(),
+            'to'            => $categories->to(),
+        ],
+        'categories'        => $categories
+    ];
     }
 
     public function store (Request $request){
