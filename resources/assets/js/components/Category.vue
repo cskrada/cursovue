@@ -211,7 +211,6 @@
             desactiveCategory(id){
                 swal({
                       title: 'Esta seguro de desactivar esta categoria',
-                      text: "You won't be able to revert this!",
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -251,8 +250,7 @@
             },
             activeCategory(id){
                 swal({
-                      title: 'Esta seguro de desactivar esta categoria',
-                      text: "You won't be able to revert this!",
+                      title: 'Esta seguro de activar esta categoria',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -268,13 +266,13 @@
 
                         let me = this;
 
-                            axios.put('/category/desactivar', {
+                            axios.put('/category/activar', {
                                 'id': id
                             }).then(function (response) {
                                 me.listCategory();
                                 swal(
-                                    'Desactivado',
-                                    'El registro ha sido desactivado con exito.',
+                                    'Activado',
+                                    'El registro ha sido activado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)

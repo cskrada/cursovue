@@ -33453,7 +33453,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             swal({
                 title: 'Esta seguro de desactivar esta categoria',
-                text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -33479,9 +33478,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 } else if (
                 // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.cancel) {
-                    swal('Cancelled', 'Your imaginary file is safe :)', 'error');
-                }
+                result.dismiss === swal.DismissReason.cancel) {}
+            });
+        },
+        activeCategory: function activeCategory(id) {
+            var _this2 = this;
+
+            swal({
+                title: 'Esta seguro de activar esta categoria',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+
+                    var me = _this2;
+
+                    axios.put('/category/activar', {
+                        'id': id
+                    }).then(function (response) {
+                        me.listCategory();
+                        swal('Activado', 'El registro ha sido activado con exito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel) {}
             });
         },
         validateCategory: function validateCategory() {
@@ -33630,7 +33660,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_c("i", { staticClass: "icon-ok" })]
+                                [_c("i", { staticClass: "icon-check" })]
                               )
                             ]
                       ],
