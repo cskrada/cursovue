@@ -11,8 +11,8 @@ class CategoryController extends Controller
 {
     //
     public function index (Request $request){
-        // if (!$request->ajax()) return redirect('/');
-    	$categories =  Category::paginate(2);
+        if (!$request->ajax()) return redirect('/');
+    	$categories =  Category::paginate(3);
 
     	return [
             'pagination' => [
