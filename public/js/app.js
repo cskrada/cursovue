@@ -33749,7 +33749,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-warning btn-sm",
-                            attrs: { type: "button" },
+                            attrs: { type: "button", title: "Editar" },
                             on: {
                               click: function($event) {
                                 _vm.openmodal("category", "update", category)
@@ -33765,7 +33765,7 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
+                                  attrs: { type: "button", title: "Estado" },
                                   on: {
                                     click: function($event) {
                                       _vm.desactiveCategory(category.id)

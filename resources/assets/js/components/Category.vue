@@ -42,11 +42,11 @@
                                     tabla dinamica-->
                                 <tr v-for="category in arrayCategory" :key="category.id">
                                     <td>
-                                        <button type="button" @click="openmodal('category','update',category)" class="btn btn-warning btn-sm">
+                                        <button type="button" @click="openmodal('category','update',category)" class="btn btn-warning btn-sm" title="Editar">
                                           <i class="icon-pencil"></i>
                                         </button> &nbsp;
                                         <template v-if="category.condition">
-                                            <button type="button" class="btn btn-danger btn-sm" @click="desactiveCategory(category.id)">
+                                            <button type="button" @click="desactiveCategory(category.id)" class="btn btn-danger btn-sm" title="Estado">
                                                 <i class="icon-trash"></i>
                                             </button>
                                         </template>
