@@ -17,22 +17,22 @@ class CategoryController extends Controller
         $criterio = $request->criterio;
 
         if ($buscar == ''){
-    	   $categories  =  Category::orderBy('id', 'desc')->paginate(3);
+    	   $articles  =  Article::orderBy('id', 'desc')->paginate(3);
         }
         else{
-            $categories = Category::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);    
+            $articles = Article::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);    
         }
 
     	return [
             'pagination' => [
-                'total'         => $categories->total(),
-                'current_page'  => $categories->currentPage(),
-                'per_page'      => $categories->perPage(),
-                'last_page'     => $categories->lastPage(),
-                'from'          => $categories->firstItem(),
-                'to'            => $categories->lastItem(),
+                'total'         => $articles->total(),
+                'current_page'  => $articles->currentPage(),
+                'per_page'      => $articles->perPage(),
+                'last_page'     => $articles->lastPage(),
+                'from'          => $articles->firstItem(),
+                'to'            => $articles->lastItem(),
             ],
-            'categories'        => $categories
+            'articles'        => $articles
         ];
     }
 
