@@ -11,8 +11,17 @@ class CategoryController extends Controller
 {
     //
     public function index (Request $request){
-        if (!$request->ajax()) return redirect('/');
-    	$categories =  Category::paginate(3);
+        //if (!$request->ajax()) return redirect('/');
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+
+        if ($buscar == ''){
+    	   $categories  =  Category::orderBy('id', 'desc')->paginate(3);
+        }
+        else{
+            $categories = Category::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);    
+        }
 
     	return [
             'pagination' => [
