@@ -19,11 +19,11 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
+                                    <select class="form-control col-md-3" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                     </select>
-                                    <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
@@ -158,7 +158,9 @@
                     'from'         : 0,
                     'to'           : 0,
                 },
-                offset : 3
+                offset : 3,
+                criterio: 'name',
+                buscar : ''
             } 
         },
         computed:{
