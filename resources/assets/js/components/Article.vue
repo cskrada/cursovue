@@ -245,7 +245,7 @@
                 let me=this;
                 var url= '/category/selectCategory';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                    // console.log(response);
                     var respuesta= response.data;
                     me.arrayCategory = respuesta.categories;
                 })
