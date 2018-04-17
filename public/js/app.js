@@ -34537,20 +34537,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        updateCategory: function updateCategory() {
-            if (this.validateCategory()) {
+        updateArticle: function updateArticle() {
+            if (this.validateArticle()) {
                 return;
             }
 
             var me = this;
 
-            axios.put('/category/actualizar', {
+            axios.put('/article/actualizar', {
+                'idcategory': this.idcategory,
+                'code': this.code,
                 'name': this.name,
+                'stock': this.stock,
+                'price': this.price,
                 'description': this.description,
-                'id': this.category_id
+                'id': this.article_id
             }).then(function (response) {
                 me.closemodal();
-                me.listCategory(1, '', 'name');
+                me.listArticle(1, '', 'name');
             }).catch(function (error) {
                 console.log(error);
             });

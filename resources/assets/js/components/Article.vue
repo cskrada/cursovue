@@ -281,20 +281,24 @@
                     console.log(error);
                 });
             }, 
-            updateCategory(){
-                if(this.validateCategory()){
+            updateArticle(){
+                if(this.validateArticle()){
                     return;
                 }
 
                 let me = this;
 
-                axios.put('/category/actualizar', {
-                    'name' : this.name,
-                    'description' : this.description,
-                    'id': this.category_id
+                axios.put('/article/actualizar', {
+                    'idcategory' : this.idcategory,
+                    'code'       : this.code,
+                    'name'       : this.name,
+                    'stock'      : this.stock,
+                    'price'      : this.price,
+                    'description': this.description,
+                    'id'         : this.article_id
                 }).then(function (response) {
                     me.closemodal();
-                    me.listCategory(1,'','name');
+                    me.listArticle(1,'','name');
                 }).catch(function(error)
                 {
                     console.log(error);
