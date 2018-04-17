@@ -17,23 +17,31 @@ class CategoryController extends Controller
         $criterio = $request->criterio;
 
         if ($buscar == ''){
-    	   $articles  =  Article::orderBy('id', 'desc')->paginate(3);
+    	   $categories  =  Category::orderBy('id', 'desc')->paginate(3);
         }
         else{
-            $articles = Article::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);    
+            $categories = Category::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);    
         }
 
     	return [
             'pagination' => [
-                'total'         => $articles->total(),
-                'current_page'  => $articles->currentPage(),
-                'per_page'      => $articles->perPage(),
-                'last_page'     => $articles->lastPage(),
-                'from'          => $articles->firstItem(),
-                'to'            => $articles->lastItem(),
+                'total'         => $categories->total(),
+                'current_page'  => $categories->currentPage(),
+                'per_page'      => $categories->perPage(),
+                'last_page'     => $categories->lastPage(),
+                'from'          => $categories->firstItem(),
+                'to'            => $categories->lastItem(),
             ],
-            'articles'        => $articles
+            'categories'        => $categories
         ];
+    }
+
+    public function selectCategory(Request $request){
+        if (!$request->ajax()) return redirect('/');
+
+        $categories = Category::where('condition','=','1')
+        ->select('id','name')->orderBy('name','asc')->get();
+        return ['categories' => $categories];
     }
 
     public function store (Request $request){

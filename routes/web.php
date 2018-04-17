@@ -16,16 +16,17 @@ Route::get('/', function () {
 });
 
 //rutas para Categoria
-Route::get('/category',            'CategoryController@index');
+Route::get('/category', 'CategoryController@index');
 Route::post('/category/registrar', 'CategoryController@store');
 Route::put('/category/actualizar', 'CategoryController@update');
 Route::put('/category/desactivar', 'CategoryController@desactivar');
-Route::put('/category/activar',    'CategoryController@activar');
+Route::put('/category/activar', 'CategoryController@activar');
+Route::get('/category/selectCategory', 'CategoryController@selectCategory');
 
 //Rutas para Articulos
-Route::get('/article', 			  'ArticleController@index');
+Route::get('/article', 'ArticleController@index');
 Route::post('/article/registrar', 'ArticleController@store');
 Route::put('/article/actualizar', 'ArticleController@update');
 Route::put('/article/desactivar', 'ArticleController@desactivar');
-Route::put('/article/activar',    'ArticleController@activar');
+Route::put('/article/activar', 'ArticleController@activar');
 
