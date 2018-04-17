@@ -156,8 +156,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="closemodal()">Cerrar</button>
-                            <button type="button" v-if="typeaction==1" class="btn btn-primary" @click="registerCategory()">Guardar</button>
-                            <button type="button" v-if="typeaction==2" class="btn btn-primary" @click="updateCategory()">Actualizar</button>
+                            <button type="button" v-if="typeaction==1" class="btn btn-primary" @click="registerArticle()">Guardar</button>
+                            <button type="button" v-if="typeaction==2" class="btn btn-primary" @click="updateArticle()">Actualizar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -261,18 +261,22 @@
                 me.listArticle(page,buscar,criterio);
             },
             registerArticle(){
-                if(this.validateCategory()){
+                if(this.validateArticle()){
                     return;
                 }
 
                 let me = this;
 
-                axios.post('/category/registrar', {
-                    'name' : this.name,
-                    'description' : this.description
+                axios.post('/article/registrar', {
+                    'idcategory' : this.idcategory,
+                    'code'       : this.code,
+                    'name'       : this.name,
+                    'stock'      : this.stock,
+                    'price'      : this.price,
+                    'description': this.description
                 }).then(function (response) {
                     me.closemodal();
-                    me.listCategory(1,'','name');
+                    me.listArticle(1,'','name');
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -376,20 +380,30 @@
                       }
                     })
             },
-            validateCategory(){
-                this.errorCategory = 0;
-                this.errorShowMssgCategory = [];
+            validateArticle(){
+                this.errorArticle = 0;
+                this.errorShowMssgArticle = [];
 
-                if (!this.name) this.errorShowMssgCategory.push("el nombre de categoria no puede estar vacio");
-                if (this.errorShowMssgCategory.length) this.errorCategory = 1;
+                if(this.idcategory == 0) this.errorShowMssgArticle.push("Seleccione una categoria.");
+                if (!this.name) this.errorShowMssgArticle.push("el nombre del articulo no puede estar vacio");
+                if (!this.stock) this.errorShowMssgArticle.push("El stock del articulo debe ser un número y no puede estar vacio");
+                if (!this.price) this.errorShowMssgArticle.push("El precio venta del articulo debe ser un número y no puede estar vacio");
 
-                return this.errorCategory;
+                if (this.errorShowMssgArticle.length) this.errorArticle = 1;
+
+                return this.errorArticle;
             },
             closemodal(){
                 this.modal=0;
                 this.titlemodal='';
+                this.idcategory= 0;
+                this.name_category= '';
+                this.code= '';
                 this.name='';
+                this.price= 0;
+                this.stock= 0;
                 this.description='';
+                this.errorArticle= 0;
             },
             // se crea un metodo de abrir modal donde se le pasa tres parametros
             openmodal(modelo, accion, data = []){
@@ -401,7 +415,12 @@
                             {
                                 this.modal = 1;
                                 this.titlemodal = "Registrar Articulo";
+                                this.idcategory = 0;
+                                this.name_category ='';
+                                this.code = '';
                                 this.name = '';
+                                this.price = 0;
+                                this.stock = 0;
                                 this.description = '';
                                 this.typeaction = 1;
                                 break;
@@ -412,8 +431,12 @@
                                 this.modal=1;
                                 this.titlemodal="Actualizar Articulo";
                                 this.typeaction=2;
-                                this.category_id= data['id'];
+                                this.article_id= data['id'];
+                                this.idcategory= data['idcategory'];
+                                this.code= data['code'];
                                 this.name = data ['name'];
+                                this.price= data['price'];
+                                this.stock= data['stock'];
                                 this.description = data ['description'];
                                 break;
                             }
