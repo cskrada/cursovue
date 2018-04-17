@@ -10,7 +10,8 @@
         </template>
 
         <template v-if="menu==2">
-            <h2>Contenido de menu Almacen/articulos</h2>
+            <item></item>
+            {{-- nuestro componente articulo llamado item app.js --}}
         </template>
 
         <template v-if="menu==3">
