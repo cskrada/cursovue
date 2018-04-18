@@ -48,12 +48,12 @@
                                           <i class="icon-pencil"></i>
                                         </button> &nbsp;
                                         <template v-if="article.condition">
-                                            <button type="button" @click="desactiveCategory(article.id)" class="btn btn-danger btn-sm" title="Estado">
+                                            <button type="button" @click="desactiveArticle(article.id)" class="btn btn-danger btn-sm" title="Estado">
                                                 <i class="icon-trash"></i>
                                             </button>
                                         </template>
                                         <template v-else>
-                                            <button type="button" class="btn btn-info btn-sm" @click="activeCategory(article.id)">
+                                            <button type="button" class="btn btn-info btn-sm" @click="activeArticle(article.id)">
                                                 <i class="icon-check"></i>
                                             </button>
                                         </template>
@@ -304,9 +304,9 @@
                     console.log(error);
                 });
             },
-            desactiveCategory(id){
+            desactiveArticle(id){
                 swal({
-                      title: 'Esta seguro de desactivar esta categoria',
+                      title: 'Esta seguro de desactivar este articulo',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -322,13 +322,13 @@
 
                         let me = this;
 
-                            axios.put('/category/desactivar', {
+                            axios.put('/article/desactivar', {
                                 'id': id
                             }).then(function (response) {
-                                me.listCategory(1,'','name');
+                                me.listArticle(1,'','name');
                                 swal(
                                     'Desactivado',
-                                    'El registro ha sido desactivado con exito.',
+                                    'El articulo ha sido desactivado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
@@ -344,9 +344,9 @@
                       }
                     })
             },
-            activeCategory(id){
+            activeArticle(id){
                 swal({
-                      title: 'Esta seguro de activar esta categoria',
+                      title: 'Esta seguro de activar este articulo',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -362,13 +362,13 @@
 
                         let me = this;
 
-                            axios.put('/category/activar', {
+                            axios.put('/article/activar', {
                                 'id': id
                             }).then(function (response) {
-                                me.listCategory(1,'','name');
+                                me.listArticle(1,'','name');
                                 swal(
                                     'Activado',
-                                    'El registro ha sido activado con exito.',
+                                    'El articulo ha sido activado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
