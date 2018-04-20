@@ -30,3 +30,8 @@ Route::put('/article/actualizar', 'ArticleController@update');
 Route::put('/article/desactivar', 'ArticleController@desactivar');
 Route::put('/article/activar', 'ArticleController@activar');
 
+//Rutas para Cliente
+Route::get('/client', 'ClientController@index');
+Route::post('/client/registrar', 'ClientController@store');
+Route::put('/client/actualizar', 'ClientController@update');
+
