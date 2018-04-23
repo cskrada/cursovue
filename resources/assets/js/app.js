@@ -20,6 +20,7 @@ Vue.component('category', require('./components/Category.vue'));
 Vue.component('item', require('./components/Article.vue'));
 Vue.component('client', require('./components/Client.vue'));
 Vue.component('provider', require('./components/Provider.vue'));
+Vue.component('role', require('./components/Role.vue'));
 
 const app = new Vue({
     el: '#app',
