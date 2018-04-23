@@ -92,19 +92,47 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre de categoría">
+                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre de la persona">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Tipo Documento</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="description" class="form-control" placeholder="Ingrese descripcion">
+                                        <select type="text" v-model="type_document" class="form-control">
+                                            <option value="DNI">DNI</option>
+                                            <option value="RUT">RUT</option>
+                                            <option value="PASS">PASS</option>
+                                        </select>  
                                     </div>
                                 </div>
-                                <div v-show="errorCategory" class="form-group row div-error">
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Número</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="num_document" class="form-control" placeholder="Ingrese Número de documento">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Dirección</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="address" class="form-control" placeholder="Ingrese Dirección">  
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Teléfono</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="phone" class="form-control" placeholder="Ingrese Teléfono">  
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="email-input">Email</label>
+                                    <div class="col-md-9">
+                                        <input type="email" v-model="email" class="form-control" placeholder="Ingrese email">
+                                    </div>
+                                </div>
+                                <div v-show="errorPerson" class="form-group row div-error">
                                     <div class="text-center text-error">
-                                        <div v-for="error in errorShowMssgCategory" :key="error" v-text="error">
+                                        <div v-for="error in errorShowMssgPerson" :key="error" v-text="error">
                                             
                                         </div>
                                     </div>
@@ -113,8 +141,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="closemodal()">Cerrar</button>
-                            <button type="button" v-if="typeaction==1" class="btn btn-primary" @click="registerCategory()">Guardar</button>
-                            <button type="button" v-if="typeaction==2" class="btn btn-primary" @click="updateCategory()">Actualizar</button>
+                            <button type="button" v-if="typeaction==1" class="btn btn-primary" @click="registerPerson()">Guardar</button>
+                            <button type="button" v-if="typeaction==2" class="btn btn-primary" @click="updatePerson()">Actualizar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -203,69 +231,86 @@
                 //envia la peticion para visualizar la data de esa pagina
                 me.listPerson(page,buscar,criterio);
             },
-            registerCategory(){
-                if(this.validateCategory()){
+            registerPerson(){
+                if(this.validatePerson()){
                     return;
                 }
 
                 let me = this;
 
-                axios.post('/category/registrar', {
+                axios.post('/client/registrar', {
                     'name' : this.name,
-                    'description' : this.description
+                    'type_document' : this.type_document,
+                    'num_document' : this.num_document,
+                    'address' : this.address,
+                    'phone' : this.phone,
+                    'email' : this.email
                 }).then(function (response) {
                     me.closemodal();
-                    me.listCategory(1,'','name');
+                    me.listPerson(1,'','name');
                 }).catch(function(error){
                     console.log(error);
                 });
             }, 
-            updateCategory(){
-                if(this.validateCategory()){
+            updatePerson(){
+                if(this.validatePerson()){
                     return;
                 }
 
                 let me = this;
 
-                axios.put('/category/actualizar', {
+                axios.put('/client/actualizar', {
                     'name' : this.name,
-                    'description' : this.description,
-                    'id': this.category_id
+                    'type_document' : this.type_document,
+                    'num_document' : this.num_document,
+                    'address' : this.address,
+                    'phone' : this.phone,
+                    'email' : this.email,
+                    'id' : this.person_id
                 }).then(function (response) {
                     me.closemodal();
-                    me.listCategory(1,'','name');
+                    me.listPerson(1,'','name');
                 }).catch(function(error)
                 {
                     console.log(error);
                 });
             },
-            validateCategory(){
-                this.errorCategory = 0;
-                this.errorShowMssgCategory = [];
+            validatePerson(){
+                this.errorPerson = 0;
+                this.errorShowMssgPerson = [];
 
-                if (!this.name) this.errorShowMssgCategory.push("el nombre de categoria no puede estar vacio");
-                if (this.errorShowMssgCategory.length) this.errorCategory = 1;
+                if (!this.name) this.errorShowMssgPerson.push("el nombre de la persona no puede estar vacio");
+                if (this.errorShowMssgPerson.length) this.errorPerson = 1;
 
-                return this.errorCategory;
+                return this.errorPerson;
             },
             closemodal(){
                 this.modal=0;
                 this.titlemodal='';
                 this.name='';
-                this.description='';
+                this.type_document='DNI';
+                this.num_document='';
+                this.address='';
+                this.phone='';
+                this.email='';
+                this.errorPerson= 0;
             },
             // se crea un metodo de abrir modal donde se le pasa tres parametros
             openmodal(modelo, accion, data = []){
                 switch(modelo){
-                    case "category":
+                    case "person":
                     {
                         switch(accion){
                             case "register":
                             {
                                 this.modal = 1;
-                                this.titlemodal = "Registrar Categoria";
+                                this.titlemodal = "Registrar Cliente";
                                 this.name = '';
-                                this.description = '';
+                                this.type_document = 'DNI';
+                                this.num_document ='';
+                                this.address ='';
+                                this.phone ='';
+                                this.email ='';
                                 this.typeaction = 1;
                                 break;
                             }
@@ -273,11 +318,15 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.titlemodal="Actualizar Categoria";
+                                this.titlemodal="Actualizar Cliente";
                                 this.typeaction=2;
-                                this.category_id= data['id'];
+                                this.person_id= data['id'];
                                 this.name = data ['name'];
-                                this.description = data ['description'];
+                                this.type_document = data ['type_document'];
+                                this.num_document = data ['num_document'];
+                                this.address = data ['address'];
+                                this.phone = data ['phone'];
+                                this.email = data ['email'];
                                 break;
                             }
                         }
