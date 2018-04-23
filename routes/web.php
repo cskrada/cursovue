@@ -40,3 +40,5 @@ Route::get('/provider', 'ProviderController@index');
 Route::post('/provider/registrar', 'ProviderController@store');
 Route::put('/provider/actualizar', 'ProviderController@update');
 
+//Rutas para Los Roles
+Route::get('/role', 'RoleController@index');
