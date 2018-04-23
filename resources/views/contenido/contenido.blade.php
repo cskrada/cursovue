@@ -19,7 +19,7 @@
         </template>
 
         <template v-if="menu==4">
-            <h2>Contenido de menu Compras/proveedores</h2>
+            <provider></provider>
         </template>
 
         <template v-if="menu==5">
