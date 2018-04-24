@@ -42372,6 +42372,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42587,6 +42597,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     }
             }
+        },
+        desactiveUser: function desactiveUser(id) {
+            var _this = this;
+
+            swal({
+                title: 'Esta seguro de desactivar este usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+
+                    var me = _this;
+
+                    axios.put('/user/desactivar', {
+                        'id': id
+                    }).then(function (response) {
+                        me.listPerson(1, '', 'name');
+                        swal('Desactivado', 'El registro ha sido desactivado con exito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel) {}
+            });
+        },
+        activeUser: function activeUser(id) {
+            var _this2 = this;
+
+            swal({
+                title: 'Esta seguro de activar este usuario',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+
+                    var me = _this2;
+
+                    axios.put('/user/activar', {
+                        'id': id
+                    }).then(function (response) {
+                        me.listPerson(1, '', 'name');
+                        swal('Activado', 'El registro ha sido activado con exito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel) {}
+            });
         }
     },
     mounted: function mounted() {
@@ -42737,21 +42813,57 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.arrayPerson, function(person) {
                   return _c("tr", { key: person.id }, [
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-warning btn-sm",
-                          attrs: { type: "button", title: "Editar" },
-                          on: {
-                            click: function($event) {
-                              _vm.openmodal("person", "update", person)
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            attrs: { type: "button", title: "Editar" },
+                            on: {
+                              click: function($event) {
+                                _vm.openmodal("person", "update", person)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-pencil" })]
-                      )
-                    ]),
+                          },
+                          [_c("i", { staticClass: "icon-pencil" })]
+                        ),
+                        _vm._v("  \n                                "),
+                        person.condition
+                          ? [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button", title: "Estado" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.desactiveUser(person.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-trash" })]
+                              )
+                            ]
+                          : [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.activeUser(person.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-check" })]
+                              )
+                            ]
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(person.name) }
