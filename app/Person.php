@@ -15,4 +15,9 @@ class Person extends Model
     {
     	return $this->hasOne('App\Provider');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }
