@@ -428,7 +428,7 @@
                                 me.listPerson(1,'','name');
                                 swal(
                                     'Desactivado',
-                                    'El registro ha sido desactivado con exito.',
+                                    'El usuario ha sido desactivado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
@@ -468,7 +468,7 @@
                                 me.listPerson(1,'','name');
                                 swal(
                                     'Activado',
-                                    'El registro ha sido activado con exito.',
+                                    'El usuario ha sido activado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)

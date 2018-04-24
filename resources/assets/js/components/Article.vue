@@ -8,7 +8,7 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Articulos
+                        <i class="fa fa-align-justify"></i> Artículos
                         <button type="button" @click="openmodal('article','register')" class="btn btn-secondary">
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
@@ -313,7 +313,7 @@
             },
             desactiveArticle(id){
                 swal({
-                      title: 'Esta seguro de desactivar este articulo',
+                      title: 'Esta seguro de desactivar este artículo',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -335,7 +335,7 @@
                                 me.listArticle(1,'','name');
                                 swal(
                                     'Desactivado',
-                                    'El articulo ha sido desactivado con exito.',
+                                    'El artículo ha sido desactivado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
@@ -353,7 +353,7 @@
             },
             activeArticle(id){
                 swal({
-                      title: 'Esta seguro de activar este articulo',
+                      title: 'Esta seguro de activar este artículo',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -375,7 +375,7 @@
                                 me.listArticle(1,'','name');
                                 swal(
                                     'Activado',
-                                    'El articulo ha sido activado con exito.',
+                                    'El artículo ha sido activado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
@@ -395,10 +395,10 @@
                 this.errorArticle = 0;
                 this.errorShowMssgArticle = [];
 
-                if(this.idcategory == 0) this.errorShowMssgArticle.push("Seleccione una categoria.");
-                if (!this.name) this.errorShowMssgArticle.push("el nombre del articulo no puede estar vacio");
-                if (!this.stock) this.errorShowMssgArticle.push("El stock del articulo debe ser un número y no puede estar vacio");
-                if (!this.price) this.errorShowMssgArticle.push("El precio venta del articulo debe ser un número y no puede estar vacio");
+                if(this.idcategory == 0) this.errorShowMssgArticle.push("Seleccione una categoría.");
+                if (!this.name) this.errorShowMssgArticle.push("el nombre del artículo no puede estar vacío");
+                if (!this.stock) this.errorShowMssgArticle.push("El stock del artículo debe ser un número y no puede estar vacío");
+                if (!this.price) this.errorShowMssgArticle.push("El precio venta del artículo debe ser un número y no puede estar vacío");
 
                 if (this.errorShowMssgArticle.length) this.errorArticle = 1;
 

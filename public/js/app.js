@@ -34461,7 +34461,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             swal({
-                title: 'Esta seguro de desactivar esta categoria',
+                title: 'Esta seguro de desactivar esta categoría',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -34494,7 +34494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             swal({
-                title: 'Esta seguro de activar esta categoria',
+                title: 'Esta seguro de activar esta categoría',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -34527,7 +34527,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorCategory = 0;
             this.errorShowMssgCategory = [];
 
-            if (!this.name) this.errorShowMssgCategory.push("el nombre de categoria no puede estar vacio");
+            if (!this.name) this.errorShowMssgCategory.push("el nombre de categoría no puede estar vacío");
             if (this.errorShowMssgCategory.length) this.errorCategory = 1;
 
             return this.errorCategory;
@@ -34550,7 +34550,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case "register":
                                 {
                                     this.modal = 1;
-                                    this.titlemodal = "Registrar Categoria";
+                                    this.titlemodal = "Registrar Categoría";
                                     this.name = '';
                                     this.description = '';
                                     this.typeaction = 1;
@@ -34560,7 +34560,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.titlemodal = "Actualizar Categoria";
+                                    this.titlemodal = "Actualizar Categoría";
                                     this.typeaction = 2;
                                     this.category_id = data['id'];
                                     this.name = data['name'];
@@ -34993,7 +34993,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "email",
-                            placeholder: "Ingrese descripcion"
+                            placeholder: "Ingrese descripción"
                           },
                           domProps: { value: _vm.description },
                           on: {
@@ -35543,7 +35543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             swal({
-                title: 'Esta seguro de desactivar este articulo',
+                title: 'Esta seguro de desactivar este artículo',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -35563,7 +35563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'id': id
                     }).then(function (response) {
                         me.listArticle(1, '', 'name');
-                        swal('Desactivado', 'El articulo ha sido desactivado con exito.', 'success');
+                        swal('Desactivado', 'El artículo ha sido desactivado con exito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -35576,7 +35576,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             swal({
-                title: 'Esta seguro de activar este articulo',
+                title: 'Esta seguro de activar este artículo',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -35596,7 +35596,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'id': id
                     }).then(function (response) {
                         me.listArticle(1, '', 'name');
-                        swal('Activado', 'El articulo ha sido activado con exito.', 'success');
+                        swal('Activado', 'El artículo ha sido activado con exito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -35609,10 +35609,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorArticle = 0;
             this.errorShowMssgArticle = [];
 
-            if (this.idcategory == 0) this.errorShowMssgArticle.push("Seleccione una categoria.");
-            if (!this.name) this.errorShowMssgArticle.push("el nombre del articulo no puede estar vacio");
-            if (!this.stock) this.errorShowMssgArticle.push("El stock del articulo debe ser un número y no puede estar vacio");
-            if (!this.price) this.errorShowMssgArticle.push("El precio venta del articulo debe ser un número y no puede estar vacio");
+            if (this.idcategory == 0) this.errorShowMssgArticle.push("Seleccione una categoría.");
+            if (!this.name) this.errorShowMssgArticle.push("el nombre del artículo no puede estar vacío");
+            if (!this.stock) this.errorShowMssgArticle.push("El stock del artículo debe ser un número y no puede estar vacío");
+            if (!this.price) this.errorShowMssgArticle.push("El precio venta del artículo debe ser un número y no puede estar vacío");
 
             if (this.errorShowMssgArticle.length) this.errorArticle = 1;
 
@@ -38433,7 +38433,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Articulos\n                "),
+          _vm._v(" Artículos\n                "),
           _c(
             "button",
             {
@@ -42622,7 +42622,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'id': id
                     }).then(function (response) {
                         me.listPerson(1, '', 'name');
-                        swal('Desactivado', 'El registro ha sido desactivado con exito.', 'success');
+                        swal('Desactivado', 'El usuario ha sido desactivado con exito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -42655,7 +42655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'id': id
                     }).then(function (response) {
                         me.listPerson(1, '', 'name');
-                        swal('Activado', 'El registro ha sido activado con exito.', 'success');
+                        swal('Activado', 'El usuario ha sido activado con exito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });

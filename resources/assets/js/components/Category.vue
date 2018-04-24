@@ -108,7 +108,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="description" class="form-control" placeholder="Ingrese descripcion">
+                                        <input type="email" v-model="description" class="form-control" placeholder="Ingrese descripción">
                                     </div>
                                 </div>
                                 <div v-show="errorCategory" class="form-group row div-error">
@@ -246,7 +246,7 @@
             },
             desactiveCategory(id){
                 swal({
-                      title: 'Esta seguro de desactivar esta categoria',
+                      title: 'Esta seguro de desactivar esta categoría',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -286,7 +286,7 @@
             },
             activeCategory(id){
                 swal({
-                      title: 'Esta seguro de activar esta categoria',
+                      title: 'Esta seguro de activar esta categoría',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -328,7 +328,7 @@
                 this.errorCategory = 0;
                 this.errorShowMssgCategory = [];
 
-                if (!this.name) this.errorShowMssgCategory.push("el nombre de categoria no puede estar vacio");
+                if (!this.name) this.errorShowMssgCategory.push("el nombre de categoría no puede estar vacío");
                 if (this.errorShowMssgCategory.length) this.errorCategory = 1;
 
                 return this.errorCategory;
@@ -348,7 +348,7 @@
                             case "register":
                             {
                                 this.modal = 1;
-                                this.titlemodal = "Registrar Categoria";
+                                this.titlemodal = "Registrar Categoría";
                                 this.name = '';
                                 this.description = '';
                                 this.typeaction = 1;
@@ -358,7 +358,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.titlemodal="Actualizar Categoria";
+                                this.titlemodal="Actualizar Categoría";
                                 this.typeaction=2;
                                 this.category_id= data['id'];
                                 this.name = data ['name'];
