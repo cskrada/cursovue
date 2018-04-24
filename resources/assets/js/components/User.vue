@@ -278,15 +278,17 @@
 
                 let me = this;
 
-                axios.post('/provider/registrar', {
+                axios.post('/user/registrar', {
                     'name' : this.name,
                     'type_document' : this.type_document,
                     'num_document' : this.num_document,
                     'address' : this.address,
                     'phone' : this.phone,
                     'email' : this.email,
-                    'contact' : this.contact,
-                    'phone_contact' : this.phone_contact
+                    'user' : this.user,
+                    'password' : this.password,
+                    'idrole' : this.idrole
+
                 }).then(function (response) {
                     me.closemodal();
                     me.listPerson(1,'','name');
@@ -301,15 +303,16 @@
 
                 let me = this;
 
-                axios.put('/provider/actualizar', {
+                axios.put('/user/actualizar', {
                     'name' : this.name,
                     'type_document' : this.type_document,
                     'num_document' : this.num_document,
                     'address' : this.address,
                     'phone' : this.phone,
                     'email' : this.email,
-                    'contact' : this.contact,
-                    'phone_contact' : this.phone_contact,
+                    'user' : this.user,
+                    'password' : this.password,
+                    'idrole' : this.idrole,
                     'id' : this.person_id
                 }).then(function (response) {
                     me.closemodal();
@@ -324,6 +327,10 @@
                 this.errorShowMssgPerson = [];
 
                 if (!this.name) this.errorShowMssgPerson.push("el nombre de la persona no puede estar vacio");
+                if (!this.user) this.errorShowMssgPerson.push("el nombre de usuario no puede estar vacio");
+                if (!this.password) this.errorShowMssgPerson.push("el password no puede estar vacio");
+                if (this.idrole == 0) this.errorShowMssgPerson.push("Debes seleccionar un rol para el usuario");
+
                 if (this.errorShowMssgPerson.length) this.errorPerson = 1;
 
                 return this.errorPerson;
