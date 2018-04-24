@@ -35642,7 +35642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case "register":
                                 {
                                     this.modal = 1;
-                                    this.titlemodal = "Registrar Articulo";
+                                    this.titlemodal = "Registrar Artículo";
                                     this.idcategory = 0;
                                     this.name_category = '';
                                     this.code = '';
@@ -35657,7 +35657,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.titlemodal = "Actualizar Articulo";
+                                    this.titlemodal = "Actualizar Artículo";
                                     this.typeaction = 2;
                                     this.article_id = data['id'];
                                     this.idcategory = data['idcategory'];
@@ -39975,7 +39975,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre de la persona"
+                            placeholder: "Nombre del Cliente"
                           },
                           domProps: { value: _vm.name },
                           on: {
@@ -40753,7 +40753,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case "register":
                                 {
                                     this.modal = 1;
-                                    this.titlemodal = "Registrar Cliente";
+                                    this.titlemodal = "Registrar Proveedor";
                                     this.name = '';
                                     this.type_document = 'RUT';
                                     this.num_document = '';
@@ -40769,7 +40769,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.titlemodal = "Actualizar Cliente";
+                                    this.titlemodal = "Actualizar Proveedor";
                                     this.typeaction = 2;
                                     this.person_id = data['id'];
                                     this.name = data['name'];
@@ -42363,6 +42363,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42375,9 +42384,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             phone: '',
             email: '',
             user: '',
-            passwor: '',
+            password: '',
             idrole: 0,
             arrayPerson: [],
+            arrayRole: [],
             modal: 0,
             titlemodal: '',
             typeaction: 0,
@@ -42432,6 +42442,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var respuesta = response.data;
                 me.arrayPerson = respuesta.persons.data;
                 me.pagination = respuesta.pagination;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        selectRole: function selectRole() {
+            var me = this;
+            var url = '/role/selectRole';
+            axios.get(url).then(function (response) {
+                var respuesta = response.data;
+                me.arrayRole = respuesta.roles;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -42508,8 +42528,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.address = '';
             this.phone = '';
             this.email = '';
-            this.contact = '';
-            this.phone_contact = '';
+            this.user = '';
+            this.password = '';
+            this.idrole = 0;
             this.errorPerson = 0;
         },
 
@@ -42517,6 +42538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         openmodal: function openmodal(modelo, accion) {
             var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
+            this.selectRole();
             switch (modelo) {
                 case "person":
                     {
@@ -42524,15 +42546,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case "register":
                                 {
                                     this.modal = 1;
-                                    this.titlemodal = "Registrar Cliente";
+                                    this.titlemodal = "Registrar Usuario";
                                     this.name = '';
-                                    this.type_document = 'RUT';
+                                    this.type_document = 'DNI';
                                     this.num_document = '';
                                     this.address = '';
                                     this.phone = '';
                                     this.email = '';
-                                    this.contact = '';
-                                    this.phone_contact = '';
+                                    this.user = '';
+                                    this.password = '';
+                                    this.idrole = 0;
                                     this.typeaction = 1;
                                     break;
                                 }
@@ -42540,7 +42563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.titlemodal = "Actualizar Cliente";
+                                    this.titlemodal = "Actualizar Usuario";
                                     this.typeaction = 2;
                                     this.person_id = data['id'];
                                     this.name = data['name'];
@@ -42549,8 +42572,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.address = data['address'];
                                     this.phone = data['phone'];
                                     this.email = data['email'];
-                                    this.contact = data['contact'];
-                                    this.phone_contact = data['phone_contact'];
+                                    this.user = data['user'];
+                                    this.password = data['password'];
+                                    this.idrole = data['idrole'];
                                     break;
                                 }
                         }
@@ -42905,7 +42929,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Nombre")]
+                        [_vm._v("Nombre (*)")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -42921,7 +42945,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre del Proveedor"
+                            placeholder: "Nombre de la persona"
                           },
                           domProps: { value: _vm.name },
                           on: {
@@ -43152,7 +43176,66 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Contacto")]
+                        [_vm._v("Rol (*)")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idrole,
+                                expression: "idrole"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idrole = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("Seleccione un Rol")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayRole, function(role) {
+                              return _c("option", {
+                                key: role.id,
+                                domProps: {
+                                  value: role.id,
+                                  textContent: _vm._s(role.name)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Usuario (*)")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -43161,22 +43244,22 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.contact,
-                              expression: "contact"
+                              value: _vm.user,
+                              expression: "user"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Ingrese Nombre de Contacto"
+                            placeholder: "Ingrese nombre de Usuario"
                           },
-                          domProps: { value: _vm.contact },
+                          domProps: { value: _vm.user },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.contact = $event.target.value
+                              _vm.user = $event.target.value
                             }
                           }
                         })
@@ -43190,7 +43273,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Teléfono de Contacto")]
+                        [_vm._v("Password (*)")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -43199,22 +43282,22 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.phone_contact,
-                              expression: "phone_contact"
+                              value: _vm.password,
+                              expression: "password"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "text",
-                            placeholder: "Ingrese Teléfono de Contacto"
+                            type: "password",
+                            placeholder: "Ingrese Password de acceso"
                           },
-                          domProps: { value: _vm.phone_contact },
+                          domProps: { value: _vm.password },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.phone_contact = $event.target.value
+                              _vm.password = $event.target.value
                             }
                           }
                         })

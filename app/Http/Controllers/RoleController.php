@@ -8,8 +8,9 @@ use App\Role;
 
 class RoleController extends Controller
 {
-    public function index (Request $request){
-        //if (!$request->ajax()) return redirect('/');
+    public function index (Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -32,5 +33,14 @@ class RoleController extends Controller
             ],
             'roles'        => $roles
         ];
+    }
+
+    public function selectRole(Request $request)
+    {
+        $roles = Role::where('condition','=','1')
+        ->select('id','name')
+        ->orderBy('name','asc')->get();
+
+        return ['roles' => $roles];
     }
 }

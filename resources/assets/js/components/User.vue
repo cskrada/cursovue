@@ -94,9 +94,9 @@
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Nombre (*)</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre del Proveedor">
+                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre de la persona">
                                         
                                     </div>
                                 </div>
@@ -135,15 +135,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Contacto</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Rol (*)</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="contact" class="form-control" placeholder="Ingrese Nombre de Contacto">  
+                                        <select class="form-control" v-model="idrole">
+                                            <option value="0">Seleccione un Rol</option>
+                                            <option v-for="role in arrayRole" :key="role.id" :value="role.id" v-text="role.name"></option>                                       
+                                        </select> 
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Teléfono de Contacto</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Usuario (*)</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="phone_contact" class="form-control" placeholder="Ingrese Teléfono de Contacto">  
+                                        <input type="text" v-model="user" class="form-control" placeholder="Ingrese nombre de Usuario">  
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Password (*)</label>
+                                    <div class="col-md-9">
+                                        <input type="password" v-model="password" class="form-control" placeholder="Ingrese Password de acceso">  
                                     </div>
                                 </div>
                                 <div v-show="errorPerson" class="form-group row div-error">
@@ -182,9 +191,10 @@
                 phone : '',
                 email : '',
                 user : '',
-                passwor : '',
+                password : '',
                 idrole : 0,
                 arrayPerson : [],
+                arrayRole : [],
                 modal : 0,
                 titlemodal : '',
                 typeaction : 0,
@@ -238,6 +248,17 @@
                     var respuesta= response.data;
                     me.arrayPerson = respuesta.persons.data;
                     me.pagination = respuesta.pagination;
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+            },
+            selectRole(){
+                let me=this;
+                var url='/role/selectRole';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayRole = respuesta.roles;
                   })
                   .catch(function (error) {
                     console.log(error);
@@ -316,12 +337,14 @@
                 this.address='';
                 this.phone='';
                 this.email='';
-                this.contact='';
-                this.phone_contact='';
+                this.user='';
+                this.password='';
+                this.idrole=0;
                 this.errorPerson= 0;
             },
             // se crea un metodo de abrir modal donde se le pasa tres parametros
             openmodal(modelo, accion, data = []){
+                this.selectRole();
                 switch(modelo){
                     case "person":
                     {
@@ -329,15 +352,16 @@
                             case "register":
                             {
                                 this.modal = 1;
-                                this.titlemodal = "Registrar Cliente";
+                                this.titlemodal = "Registrar Usuario";
                                 this.name = '';
-                                this.type_document = 'RUT';
+                                this.type_document = 'DNI';
                                 this.num_document ='';
                                 this.address ='';
                                 this.phone ='';
                                 this.email ='';
-                                this.contact='';
-                                this.phone_contact='';
+                                this.user='';
+                                this.password='';
+                                this.idrole=0;
                                 this.typeaction = 1;
                                 break;
                             }
@@ -345,7 +369,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.titlemodal="Actualizar Cliente";
+                                this.titlemodal="Actualizar Usuario";
                                 this.typeaction=2;
                                 this.person_id= data['id'];
                                 this.name = data ['name'];
@@ -354,8 +378,9 @@
                                 this.address = data ['address'];
                                 this.phone = data ['phone'];
                                 this.email = data ['email'];
-                                this.contact = data ['contact'];
-                                this.phone_contact = data ['phone_contact'];
+                                this.user = data ['user'];
+                                this.password = data ['password'];
+                                this.idrole = data ['idrole'];
                                 break;
                             }
                         }
