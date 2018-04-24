@@ -42,7 +42,7 @@ class UserController extends Controller
 	        'persons'        => $persons
 	    ];
     }
-    
+
     public function store (Request $request){
         if (!$request->ajax()) return redirect('/');
 
@@ -82,7 +82,7 @@ class UserController extends Controller
         try{
         	DB::beginTransaction();
 
-        	//Buscar primero el proveedor a modificar
+        	//Buscar primero el usuario a modificar
         	$user = User::findOrFail($request->id);
 
         	$person = Person::findOrFail($user->id);
