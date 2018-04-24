@@ -425,7 +425,7 @@
                             case "register":
                             {
                                 this.modal = 1;
-                                this.titlemodal = "Registrar Articulo";
+                                this.titlemodal = "Registrar Artículo";
                                 this.idcategory = 0;
                                 this.name_category ='';
                                 this.code = '';
@@ -440,7 +440,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.titlemodal="Actualizar Articulo";
+                                this.titlemodal="Actualizar Artículo";
                                 this.typeaction=2;
                                 this.article_id= data['id'];
                                 this.idcategory= data['idcategory'];
