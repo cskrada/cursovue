@@ -326,7 +326,7 @@
                             case "register":
                             {
                                 this.modal = 1;
-                                this.titlemodal = "Registrar Cliente";
+                                this.titlemodal = "Registrar Proveedor";
                                 this.name = '';
                                 this.type_document = 'RUT';
                                 this.num_document ='';
@@ -342,7 +342,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.titlemodal="Actualizar Cliente";
+                                this.titlemodal="Actualizar Proveedor";
                                 this.typeaction=2;
                                 this.person_id= data['id'];
                                 this.name = data ['name'];
