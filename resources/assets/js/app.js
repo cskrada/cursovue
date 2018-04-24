@@ -21,6 +21,7 @@ Vue.component('item', require('./components/Article.vue'));
 Vue.component('client', require('./components/Client.vue'));
 Vue.component('provider', require('./components/Provider.vue'));
 Vue.component('role', require('./components/Role.vue'));
+Vue.component('user', require('./components/User.vue'));
 
 const app = new Vue({
     el: '#app',
