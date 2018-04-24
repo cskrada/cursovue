@@ -92,7 +92,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre de la persona">
+                                        <input type="text" v-model="name" class="form-control" placeholder="Nombre del Cliente">
                                         
                                     </div>
                                 </div>
