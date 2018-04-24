@@ -42,6 +42,7 @@ Route::put('/provider/actualizar', 'ProviderController@update');
 
 //Rutas para Los Roles
 Route::get('/role', 'RoleController@index');
+Route::get('/role/selectRole', 'RoleController@selectRole');
 
 //Rutas para Los Usuarios
 Route::get('/user', 'UserController@index');
