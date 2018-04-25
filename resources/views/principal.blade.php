@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="vendors/img/favicon.png">
     <title>Sistema Ventas - IncanatoIT</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
  
 
     <link href="css/plantilla.css" rel="stylesheet">
