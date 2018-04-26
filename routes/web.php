@@ -10,48 +10,92 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=>['guest']],function(){
+	Route::get('/', 'Auth\LoginController@showLoginForm');
+	Route::post('/login', 'Auth\LoginController@login')->name('login');
+});
+// ------------------------------------------------------------
+Route::group(['middleware'=>['auth']],function(){
 
-Route::get('/main', function () {
-    return view('contenido/contenido');
-})->name('main');
+	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-//rutas para Categoria
-Route::get('/category', 'CategoryController@index');
-Route::post('/category/registrar', 'CategoryController@store');
-Route::put('/category/actualizar', 'CategoryController@update');
-Route::put('/category/desactivar', 'CategoryController@desactivar');
-Route::put('/category/activar', 'CategoryController@activar');
-Route::get('/category/selectCategory', 'CategoryController@selectCategory');
+	Route::get('/main', function () {
+	    return view('contenido/contenido');
+	})->name('main');
 
-//Rutas para Articulos
-Route::get('/article', 'ArticleController@index');
-Route::post('/article/registrar', 'ArticleController@store');
-Route::put('/article/actualizar', 'ArticleController@update');
-Route::put('/article/desactivar', 'ArticleController@desactivar');
-Route::put('/article/activar', 'ArticleController@activar');
+	Route::group(['middleware'=>['Almacenero']],function(){
 
-//Rutas para Cliente
-Route::get('/client', 'ClientController@index');
-Route::post('/client/registrar', 'ClientController@store');
-Route::put('/client/actualizar', 'ClientController@update');
+		//rutas para Categoria
+		Route::get('/category', 'CategoryController@index');
+		Route::post('/category/registrar', 'CategoryController@store');
+		Route::put('/category/actualizar', 'CategoryController@update');
+		Route::put('/category/desactivar', 'CategoryController@desactivar');
+		Route::put('/category/activar', 'CategoryController@activar');
+		Route::get('/category/selectCategory', 'CategoryController@selectCategory');
 
-//Rutas para Proveedor
-Route::get('/provider', 'ProviderController@index');
-Route::post('/provider/registrar', 'ProviderController@store');
-Route::put('/provider/actualizar', 'ProviderController@update');
+		//Rutas para Articulos
+		Route::get('/article', 'ArticleController@index');
+		Route::post('/article/registrar', 'ArticleController@store');
+		Route::put('/article/actualizar', 'ArticleController@update');
+		Route::put('/article/desactivar', 'ArticleController@desactivar');
+		Route::put('/article/activar', 'ArticleController@activar');
 
-//Rutas para Los Roles
-Route::get('/role', 'RoleController@index');
-Route::get('/role/selectRole', 'RoleController@selectRole');
+		//Rutas para Proveedor
+		Route::get('/provider', 'ProviderController@index');
+		Route::post('/provider/registrar', 'ProviderController@store');
+		Route::put('/provider/actualizar', 'ProviderController@update');
+	});
 
-//Rutas para Los Usuarios
-Route::get('/user', 'UserController@index');
-Route::post('/user/registrar', 'UserController@store');
-Route::put('/user/actualizar', 'UserController@update');
-Route::put('/user/desactivar', 'UserController@desactivar');
-Route::put('/user/activar', 'UserController@activar');
+	Route::group(['middleware'=>['Vendedor']],function(){
+				
+		//Rutas para Cliente
+		Route::get('/client', 'ClientController@index');
+		Route::post('/client/registrar', 'ClientController@store');
+		Route::put('/client/actualizar', 'ClientController@update');
+	});	
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::post('/login', 'Auth\LoginController@login')->name('login');
+	Route::group(['middleware'=>['Administrador']],function(){
 
-Route::get('/home', 'HomeController@index')->name('home');
+		//rutas para Categoria
+		Route::get('/category', 'CategoryController@index');
+		Route::post('/category/registrar', 'CategoryController@store');
+		Route::put('/category/actualizar', 'CategoryController@update');
+		Route::put('/category/desactivar', 'CategoryController@desactivar');
+		Route::put('/category/activar', 'CategoryController@activar');
+		Route::get('/category/selectCategory', 'CategoryController@selectCategory');
+
+		//Rutas para Articulos
+		Route::get('/article', 'ArticleController@index');
+		Route::post('/article/registrar', 'ArticleController@store');
+		Route::put('/article/actualizar', 'ArticleController@update');
+		Route::put('/article/desactivar', 'ArticleController@desactivar');
+		Route::put('/article/activar', 'ArticleController@activar');
+
+		//Rutas para Proveedor
+		Route::get('/provider', 'ProviderController@index');
+		Route::post('/provider/registrar', 'ProviderController@store');
+		Route::put('/provider/actualizar', 'ProviderController@update');
+
+
+		//Rutas para Cliente
+		Route::get('/client', 'ClientController@index');
+		Route::post('/client/registrar', 'ClientController@store');
+		Route::put('/client/actualizar', 'ClientController@update');
+
+		//Rutas para Los Roles
+		Route::get('/role', 'RoleController@index');
+		Route::get('/role/selectRole', 'RoleController@selectRole');
+
+		//Rutas para Los Usuarios
+		Route::get('/user', 'UserController@index');
+		Route::post('/user/registrar', 'UserController@store');
+		Route::put('/user/actualizar', 'UserController@update');
+		Route::put('/user/desactivar', 'UserController@desactivar');
+		Route::put('/user/activar', 'UserController@activar');
+	});
+		
+});
+// ------------------------------------------------------
+
+
+// Route::get('/home', 'HomeController@index')->name('home');

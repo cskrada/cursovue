@@ -8,12 +8,11 @@
     <meta name="description" content="Sistema Ventas Laravel Vue Js- IncanatoIT">
     <meta name="author" content="Incanatoit.com">
     <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
-    <link rel="shortcut icon" href="vendors/img/favicon.png">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <title>Sistema Ventas - IncanatoIT</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
- 
-
+    <!-- Icons -->
     <link href="css/plantilla.css" rel="stylesheet">
 </head>
 
@@ -58,14 +57,19 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    <span class="d-md-down-none">admin </span>
+                    <span class="d-md-down-none">{{Auth::user()->user}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
                         <strong>Cuenta</strong>
                     </div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" 
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-lock"></i> Cerrar sesión</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </li>
         </ul>
@@ -73,22 +77,31 @@
 
     <div class="app-body">
         
-        @include('plantilla.sidebar')
+        @if(Auth::check())
+            @if (Auth::user()->idrole == 1)
+                @include('plantilla.sidebaradministrador')
+            @elseif (Auth::user()->idrole == 2)
+                @include('plantilla.sidebarvendedor')
+            @elseif (Auth::user()->idrole == 3)
+                @include('plantilla.sidebaralmacenero')
+            @else
+ 
+            @endif
 
+        @endif
         <!-- Contenido Principal -->
-            @yield('contenido')
+        @yield('contenido')
         <!-- /Fin del contenido principal -->
+    </div>   
     </div>
-    </div>
-    {{-- fin del div de App vue --}}
-    
-
     <footer class="app-footer">
         <span><a href="http://www.incanatoit.com/">IncanatoIT</a> &copy; 2017</span>
         <span class="ml-auto">Desarrollado por <a href="http://www.incanatoit.com/">IncanatoIT</a></span>
     </footer>
+    
 
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
 </body>
+
 </html>
