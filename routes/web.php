@@ -46,6 +46,8 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::put('/provider/actualizar', 'ProviderController@update');
 
 		Route::get('/ingress', 'IngressController@index');
+		Route::post('/ingress/registrar', 'IngressController@store');
+		Route::put('/ingress/desactivar', 'IngressController@desactivar');
 	});
 
 	Route::group(['middleware'=>['Vendedor']],function(){
@@ -78,7 +80,10 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::post('/provider/registrar', 'ProviderController@store');
 		Route::put('/provider/actualizar', 'ProviderController@update');
 
+		//Rutas para Ingreso
 		Route::get('/ingress', 'IngressController@index');
+		Route::post('/ingress/registrar', 'IngressController@store');
+		Route::put('/ingress/desactivar', 'IngressController@desactivar');
 
 		//Rutas para Cliente
 		Route::get('/client', 'ClientController@index');
