@@ -10,21 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware'=>['guest']],function(){
-	Route::get('/', 'Auth\LoginController@showLoginForm');
-	Route::post('/login', 'Auth\LoginController@login')->name('login');
+    Route::get('/','Auth\LoginController@showLoginForm');
+    Route::post('/login', 'Auth\LoginController@login')->name('login');
 });
-// ------------------------------------------------------------
+
 Route::group(['middleware'=>['auth']],function(){
-
-	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-
-	Route::get('/main', function () {
-	    return view('contenido/contenido');
-	})->name('main');
+    
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    
+    Route::get('/main', function () {
+        return view('contenido/contenido');
+    })->name('main');
 
 	Route::group(['middleware'=>['Almacenero']],function(){
-
 		//rutas para Categoria
 		Route::get('/category', 'CategoryController@index');
 		Route::post('/category/registrar', 'CategoryController@store');
@@ -76,7 +76,6 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::post('/provider/registrar', 'ProviderController@store');
 		Route::put('/provider/actualizar', 'ProviderController@update');
 
-
 		//Rutas para Cliente
 		Route::get('/client', 'ClientController@index');
 		Route::post('/client/registrar', 'ClientController@store');
@@ -95,7 +94,5 @@ Route::group(['middleware'=>['auth']],function(){
 	});
 		
 });
-// ------------------------------------------------------
-
 
 // Route::get('/home', 'HomeController@index')->name('home');
