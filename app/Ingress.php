@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingress extends Model
 {
+    protected $table = 'income';
     protected $fillable = [
     	'idprovider',
     	'iduser',
