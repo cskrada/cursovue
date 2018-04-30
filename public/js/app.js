@@ -43845,6 +43845,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -43852,7 +43901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             ingress_id: 0,
             idprovider: 0,
             name: '',
-            type_voucher: 'Boleta',
+            type_voucher: 'BOLETA',
             serie_voucher: '',
             num_voucher: '',
             tax: 0.18,
@@ -44204,7 +44253,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "num_voucher" } }, [
-                      _vm._v("Número de Comprobante")
+                      _vm._v("Número Comprobante")
                     ]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "fecha_hora" } }, [
@@ -44621,7 +44670,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", VALUE: "" },
                   domProps: { value: _vm.price },
                   on: {
                     input: function($event) {
@@ -44666,7 +44715,7 @@ var render = function() {
             _vm._m(3)
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row border" })
+          _vm._m(4)
         ])
       ])
     ]),
@@ -44835,6 +44884,112 @@ var staticRenderFns = [
           "button",
           { staticClass: "btn btn-success form-control btnagregar" },
           [_c("i", { staticClass: "icon-plus" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row border" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          { staticClass: "table table-bordered table-striped table-sm" },
+          [
+            _c("thead", [
+              _c("th", [_vm._v("Opciones")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Artículo")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Precio")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Cantidad")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Subtotal")])
+            ]),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon-close" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        Artículo n\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", value: "3" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", value: "2" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        $ 6.00\n                                    "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" }
+                    },
+                    [_c("i", { staticClass: "icon-close" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        Artículo n\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", value: "3" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", value: "2" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                                        $ 6.00\n                                    "
+                  )
+                ])
+              ])
+            ])
+          ]
         )
       ])
     ])

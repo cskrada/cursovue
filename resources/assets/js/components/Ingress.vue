@@ -19,7 +19,7 @@
                                 <div class="input-group">
                                     <select class="form-control col-md-3" v-model="criterio">
                                       <option value="type_voucher">Tipo Comprobante</option>
-                                      <option value="num_voucher">Número de Comprobante</option>
+                                      <option value="num_voucher">Número Comprobante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listIngress(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
@@ -137,7 +137,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Precio</label>
-                                    <input type="number" class="form-control" v-model="price">
+                                    <input type="number" VALUE="" class="form-control" v-model="price">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -153,11 +153,60 @@
                                     </button>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="form-group row border">
-                                
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                        <th>Opciones</th>
+                                        <th>Artículo</th>   
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm">
+                                                    <i class="icon-close"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                Artículo n
+                                            </td>
+                                            <td>
+                                                <input type="number" value="3" class="form-control">
+                                            </td>
+                                            <td>
+                                                <input type="number" value="2" class="form-control">
+                                            </td>
+                                            <td>
+                                                $ 6.00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm">
+                                                    <i class="icon-close"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                Artículo n
+                                            </td>
+                                            <td>
+                                                <input type="number" value="3" class="form-control">
+                                            </td>
+                                            <td>
+                                                <input type="number" value="2" class="form-control">
+                                            </td>
+                                            <td>
+                                                $ 6.00
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,7 +247,7 @@
                 ingress_id: 0,
                 idprovider:0,
                 name :'',
-                type_voucher : 'Boleta',
+                type_voucher : 'BOLETA',
                 serie_voucher : '',
                 num_voucher : '',
                 tax: 0.18,
