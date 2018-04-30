@@ -44893,7 +44893,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group row border" }, [
-      _c("div", { staticClass: "table-responsive" }, [
+      _c("div", { staticClass: "table-responsive col-md-12" }, [
         _c(
           "table",
           { staticClass: "table table-bordered table-striped table-sm" },

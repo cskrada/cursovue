@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <div class="form-group row border">
-                            <div class="table-responsive">
+                            <div class="table-responsive col-md-12">
                                 <table class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <th>Opciones</th>
