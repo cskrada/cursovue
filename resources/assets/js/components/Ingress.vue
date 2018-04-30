@@ -8,11 +8,13 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Ingress
-                        <button type="button" @click="openmodal('ingress','register')" class="btn btn-secondary">
+                        <i class="fa fa-align-justify"></i> Ingresos
+                        <button type="button" @click="showDetail()" class="btn btn-secondary">
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                     </div>
+                    <!-- Listado -->
+                    <template v-if="listado">
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-md-6">
@@ -86,6 +88,10 @@
                             </ul>
                         </nav>
                     </div>
+                    </template>
+                    <!-- Fin Listado -->
+                    <!-- Detalle -->
+                    <template v-else>
                     <div class="card-body">
                         <div class="form-group row border">
                             <div class="col-md-9">
@@ -227,11 +233,14 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-secondary">Cerrar</button>
+                                <button type="button" class="btn btn-secondary" @click="hideDetail() ">Cerrar</button>
                                 <button type="button" class="btn btn-primary" @click="registerIngress()">Registrar Compra</button>
                             </div>
                         </div>
                     </div>
+                    </template>
+                    <!-- Fin Detalle -->
+
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
@@ -277,6 +286,7 @@
                 total: 0.0,
                 arrayIngress: [],
                 arrayDetail: [],
+                listado: 1,
                 
                 modal : 0,
                 titlemodal : '',
@@ -417,6 +427,12 @@
                 if (this.errorShowMssgPerson.length) this.errorPerson = 1;
 
                 return this.errorPerson;
+            },
+            showDetail(){
+                this.listado=0;
+            },
+            hideDetail(){
+                this.listado=1;
             },
             closemodal(){
                 this.modal=0;
