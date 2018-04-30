@@ -203,9 +203,32 @@
                                                 $ 6.00
                                             </td>
                                         </tr>
-
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Parcial:</strong>
+                                            </td>
+                                            <td>$ 5</td>
+                                        </tr>
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Impuesto:</strong>
+                                            </td>
+                                            <td>$ 1</td>
+                                        </tr>
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Neto:</strong>
+                                            </td>
+                                            <td>$ 6</td>
+                                        </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary">Cerrar</button>
+                                <button type="button" class="btn btn-primary" @click="registerIngress()">Registrar Compra</button>
                             </div>
                         </div>
                     </div>

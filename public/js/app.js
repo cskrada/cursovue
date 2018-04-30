@@ -43894,6 +43894,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -44715,7 +44738,31 @@ var render = function() {
             _vm._m(3)
           ]),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+                [_vm._v("Cerrar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.registerIngress()
+                    }
+                  }
+                },
+                [_vm._v("Registrar Compra")]
+              )
+            ])
+          ])
         ])
       ])
     ]),
@@ -44987,6 +45034,30 @@ var staticRenderFns = [
                     "\n                                        $ 6.00\n                                    "
                   )
                 ])
+              ]),
+              _vm._v(" "),
+              _c("tr", { staticStyle: { "background-color": "#CEECF5" } }, [
+                _c("td", { attrs: { colspan: "4", align: "right" } }, [
+                  _c("strong", [_vm._v("Total Parcial:")])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$ 5")])
+              ]),
+              _vm._v(" "),
+              _c("tr", { staticStyle: { "background-color": "#CEECF5" } }, [
+                _c("td", { attrs: { colspan: "4", align: "right" } }, [
+                  _c("strong", [_vm._v("Total Impuesto:")])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$ 1")])
+              ]),
+              _vm._v(" "),
+              _c("tr", { staticStyle: { "background-color": "#CEECF5" } }, [
+                _c("td", { attrs: { colspan: "4", align: "right" } }, [
+                  _c("strong", [_vm._v("Total Neto:")])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$ 6")])
               ])
             ])
           ]
