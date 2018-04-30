@@ -40,6 +40,20 @@ class ProviderController extends Controller
 	        'persons'        => $persons
 	    ];
     }
+
+    public function selectProvider(Request $request){
+      //if (!$request->ajax()) return redirect('/');
+
+      $filtro = $request->filtro;
+      $providers = Provider::join('persons','providers.id','=','persons.id')
+      ->where('persons.name','like', '%'. $filtro . '%')
+      ->orWhere('persons.num_document','like','%'. $filtro. '%')
+      ->select('persons.id','persons.name','persons.num_document')
+      ->orderBy('persons.name','asc')->get();
+
+      return ['providers' => $providers];
+    }
+
     public function store (Request $request){
         if (!$request->ajax()) return redirect('/');
 

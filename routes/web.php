@@ -44,6 +44,7 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/provider', 'ProviderController@index');
 		Route::post('/provider/registrar', 'ProviderController@store');
 		Route::put('/provider/actualizar', 'ProviderController@update');
+		Route::get('/provider/selectProvider', 'ProviderController@selectProvider');
 
 		Route::get('/ingress', 'IngressController@index');
 		Route::post('/ingress/registrar', 'IngressController@store');
@@ -79,6 +80,7 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/provider', 'ProviderController@index');
 		Route::post('/provider/registrar', 'ProviderController@store');
 		Route::put('/provider/actualizar', 'ProviderController@update');
+		Route::get('/provider/selectProvider', 'ProviderController@selectProvider');
 
 		//Rutas para Ingreso
 		Route::get('/ingress', 'IngressController@index');
