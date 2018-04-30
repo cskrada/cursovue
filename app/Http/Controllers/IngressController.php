@@ -12,7 +12,7 @@ use App\IncomeDetail;
 class IngressController extends Controller
 {
     public function index (Request $request){
-	    //if (!$request->ajax()) return redirect('/');
+	    if (!$request->ajax()) return redirect('/');
 
 	    $buscar = $request->buscar;
 	    $criterio = $request->criterio;
@@ -69,9 +69,9 @@ class IngressController extends Controller
        	 	$ingress->save();
 
           $details = $request->data;//array de detalles
-          //recorro todos los detalles
+          //recorro todos los elementos
 
-          foreach($details as $ep=$det)
+          foreach($details as $ep=>$det)
           {
             $detail = new IncomeDetail();
             $detail->idingress = $ingress->id;
@@ -87,40 +87,6 @@ class IngressController extends Controller
         	DB::rollBack();
         }      
     }
-
-    // public function update (Request $request){
-
-    //     if (!$request->ajax()) return redirect('/');
-
-    //     try{
-    //     	DB::beginTransaction();
-
-    //     	//Buscar primero el usuario a modificar
-    //     	$user = User::findOrFail($request->id);
-
-    //     	$person = Person::findOrFail($user->id);
-			
-    //     	$person->name = $request->name;
-    //     	$person->type_document = $request->type_document;
-    //     	$person->num_document = $request->num_document;
-    //     	$person->address = $request->address;
-    //     	$person->phone = $request->phone;
-    //    	 	$person->email = $request->email;
-    //    	 	$person->save();
-
-    //    	 	$user->user = $request->user;
-    //    	 	$user->password = bcrypt($request->password);
-    //    	 	$user->condition = '1';
-    //    	 	$user->idrole = $request->idrole;
-    //    	 	$user->save();
-
-    //    	 	DB::commit();
-
-    //     }catch (Exception $e){
-    //     	DB::rollBack();
-
-    //     }
-    // }
 
     public function desactivar (Request $request){
     	if (!$request->ajax()) return redirect('/');
