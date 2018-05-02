@@ -139,7 +139,7 @@
                         <div class="form-group row border">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Artículo</label>
+                                    <label>Artículo <span style="color:red;" v-show="idarticle==0">(*Seleccione)</span> </label>
                                     <div class="form-inline">
                                         <input type="text" class="form-control" v-model="code" @keyup.enter="searchArticle()"placeholder="Ingrese Artículo">
                                         <button class="btn btn-primary">...</button>
@@ -149,13 +149,13 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label>Precio</label>
+                                    <label>Precio<span style="color:red;" v-show="price==0">(*Ingrese)</span> </label>
                                     <input type="number" VALUE="" class="form-control" v-model="price">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label>Cantidad</label>
+                                    <label>Cantidad<span style="color:red;" v-show="quantity==0">(*Ingrese)</span> </label>
                                     <input type="number" class="form-control" v-model="quantity">
                                 </div>
                             </div>
@@ -401,12 +401,18 @@ import vSelect from 'vue-select';
             },
             addDetail(){
                 let me = this;
-                me.arrayDetail.push({
-                    idarticle: me.idarticle,
-                    article: me.article,
-                    quantity: me.quantity,
-                    price: me.price
-                });
+
+                if(me.idarticle==0 || me.quantity==0 || me.price==0){
+                }
+                else{
+                    me.arrayDetail.push({
+                        idarticle: me.idarticle,
+                        article: me.article,
+                        quantity: me.quantity,
+                        price: me.price
+                    });
+                }
+                
             },
             registerPerson(){
                 if(this.validatePerson()){
