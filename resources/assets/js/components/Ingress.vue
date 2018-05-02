@@ -399,25 +399,42 @@ import vSelect from 'vue-select';
                 //envia la peticion para visualizar la data de esa pagina
                 me.listIngress(page,buscar,criterio);
             },
+            encuentra(id){
+                var sw=0;
+                for (var i=0; i<this.arrayDetail.length; i++){
+                    if(this.arrayDetail[i].idarticle==id){
+                        sw=true;
+                    }
+                }
+                return sw;
+            },
             addDetail(){
                 let me = this;
 
                 if(me.idarticle==0 || me.quantity==0 || me.price==0){
                 }
                 else{
-                    me.arrayDetail.push({
-                        idarticle: me.idarticle,
-                        article: me.article,
-                        quantity: me.quantity,
-                        price: me.price
-                    });
-                    me.code="";
-                    me.idarticle=0;
-                    me.article="";
-                    me.quantity=0;
-                    me.price=0;
-                }
-                
+                    if(me.encuentra(me.idarticle)){
+                        swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ese artículo ya se encuentra agregado!',
+                        })
+                    }
+                    else{
+                        me.arrayDetail.push({
+                            idarticle: me.idarticle,
+                            article: me.article,
+                            quantity: me.quantity,
+                            price: me.price
+                        });
+                        me.code="";
+                        me.idarticle=0;
+                        me.article="";
+                        me.quantity=0;
+                        me.price=0;
+                        } 
+                }    
             },
             registerPerson(){
                 if(this.validatePerson()){
