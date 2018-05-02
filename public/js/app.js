@@ -44156,6 +44156,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         addDetailModal: function addDetailModal() {
             var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var me = this;
+            if (me.encuentra(data['id'])) {
+                swal({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Ese artículo ya se encuentra agregado!'
+                });
+            } else {
+                me.arrayDetail.push({
+                    idarticle: data['id'],
+                    article: data['name'],
+                    quantity: 1,
+                    price: 1
+                });
+            }
         },
         listArticle: function listArticle(buscar, criterio) {
             var me = this;
@@ -44243,6 +44259,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // se crea un metodo de abrir modal donde se le pasa tres parametros
         openmodal: function openmodal() {
+            this.arrayArticle = [];
             this.modal = 1;
             this.titlemodal = "Seleccione uno o varios artículos";
         },

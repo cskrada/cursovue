@@ -505,7 +505,22 @@ import vSelect from 'vue-select';
                 }    
             },
             addDetailModal(data = []){
-
+                let me = this;
+                if(me.encuentra(data['id'])){
+                        swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ese artículo ya se encuentra agregado!',
+                        })
+                    }
+                    else{
+                        me.arrayDetail.push({
+                            idarticle: data['id'],
+                            article: data['name'],
+                            quantity: 1,
+                            price: 1
+                        });
+                    }   
             },
             listArticle(buscar,criterio){
                 let me=this;
@@ -594,6 +609,7 @@ import vSelect from 'vue-select';
             },
             // se crea un metodo de abrir modal donde se le pasa tres parametros
             openmodal(){
+                this.arrayArticle=[];
                 this.modal = 1;
                 this.titlemodal = "Seleccione uno o varios artículos";
             },
