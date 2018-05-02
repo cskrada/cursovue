@@ -178,9 +178,9 @@
                                         <th>Subtotal</th>
                                     </thead>
                                     <tbody v-if="arrayDetail.length">
-                                        <tr v-for="detail in arrayDetail" :key="detail.id">
+                                        <tr v-for="(detail,index) in arrayDetail" :key="detail.id">
                                             <td>
-                                                <button type="button" class="btn btn-danger btn-sm">
+                                                <button @click="deleteDetail(index)" type="button" class="btn btn-danger btn-sm">
                                                     <i class="icon-close"></i>
                                                 </button>
                                             </td>
@@ -407,6 +407,10 @@ import vSelect from 'vue-select';
                     }
                 }
                 return sw;
+            },
+            deleteDetail(index){
+                let me = this;
+                me.arrayDetail.splice(index, 1);
             },
             addDetail(){
                 let me = this;
