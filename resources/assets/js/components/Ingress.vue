@@ -200,19 +200,19 @@
                                             <td colspan="4" align="right">
                                                 <strong>Total Parcial:</strong>
                                             </td>
-                                            <td>$ 5</td>
+                                            <td>$ {{totalPartial=(total-totalTax).toFixed(2)}}</td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
                                             <td colspan="4" align="right">
                                                 <strong>Total Impuesto:</strong>
                                             </td>
-                                            <td>$ 1</td>
+                                            <td>$ {{totalTax=((total*tax)/(1+tax)).toFixed(2)}}</td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
                                             <td colspan="4" align="right">
                                                 <strong>Total Neto:</strong>
                                             </td>
-                                            <td>$ 6</td>
+                                            <td>$ {{total=calculateTotal}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody v-else>
@@ -279,6 +279,8 @@ import vSelect from 'vue-select';
                 num_voucher : '',
                 tax: 0.18,
                 total: 0.0,
+                totalTax: 0.0,
+                totalPartial: 0.0,
                 arrayIngress: [],
                 arrayProvider: [],
                 arrayDetail: [],
@@ -336,7 +338,15 @@ import vSelect from 'vue-select';
                     from++;
                 }
                 return pagesArray;
+            },
+            calculateTotal: function(){
+                var resultado = 0.0;
+                for(var i=0; i<this.arrayDetail.length; i++){
+                    resultado=resultado+(this.arrayDetail[i].price*this.arrayDetail[i].quantity)
+                }
+                return resultado;
             }
+
         },
         methods : {
             listIngress(page,buscar,criterio){
