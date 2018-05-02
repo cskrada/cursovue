@@ -97,10 +97,15 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for="">Proveedor(*)</label>
-                                    <select class="form-control">
-                                        
-                                        
-                                    </select>
+                                    <v-select
+                                        :on-search="selectProvider"
+                                        label="name"
+                                        :options="arrayProvider"
+                                        placeholder="Buscar Proveedores..."
+                                        :onChange="getDataProvider"                                        
+                                    >
+
+                                    </v-select>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -274,6 +279,7 @@
 </template>
 
 <script>
+import vSelect from 'vue-select';
     export default {
         data (){
             return{
@@ -286,6 +292,7 @@
                 tax: 0.18,
                 total: 0.0,
                 arrayIngress: [],
+                arrayProvider: [],
                 arrayDetail: [],
                 listado: 1,
                 
@@ -306,6 +313,9 @@
                 criterio : 'num_voucher',
                 buscar : ''
             } 
+        },
+        components: {
+            vSelect
         },
         computed:{
             isActived: function(){
@@ -347,16 +357,25 @@
                     console.log(error);
                   });
             },
-            selectRole(){
+            selectProvider(search,loading){
                 let me=this;
-                var url='/role/selectRole';
+                loading(true)
+
+                var url= '/provider/selectProvider?filtro='+search;
                 axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayRole = respuesta.roles;
-                  })
-                  .catch(function (error) {
+                    let respuesta = response.data;
+                    q: search
+                    me.arrayProvider=respuesta.providers;
+                    loading(false)
+                })
+                .catch(function (error) {
                     console.log(error);
-                  });
+                });
+            },
+            getDataProvider(val1){
+                let me = this;
+                me.loading = true;
+                me.idprovider = val1.id;
             },
             changePage(page,buscar,criterio){
                 let me = this;
