@@ -50,11 +50,11 @@
                                         tabla dinamica-->
                                     <tr v-for="ingress in arrayIngress" :key="ingress.id">
                                         <td>
-                                            <button type="button" @click="openmodal('ingress','update',ingress)" class="btn btn-success btn-sm" title="Editar">
+                                            <button type="button" @click="openmodal('ingress','update',ingress)" class="btn btn-success btn-sm">
                                               <i class="icon-eye"></i>
                                             </button> &nbsp;
                                             <template v-if="ingress.status=='Registrado'">
-                                                <button type="button" @click="desactiveIngress(ingress.id)" class="btn btn-danger btn-sm" title="Estado">
+                                                <button type="button" @click="desactiveIngress(ingress.id)" class="btn btn-danger btn-sm">
                                                     <i class="icon-trash"></i>
                                                 </button>
                                             </template>
@@ -249,7 +249,59 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select class="form-control col-md-3" v-model="criterioA">
+                                          <option value="name">Nombre</option>
+                                          <option value="description">Descripción</option>
+                                          <option value="code">Código</option>
+                                        </select>
+                                        <input type="text" v-model="buscarA" @keyup.enter="listArticle(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                        <button type="submit" @click="listArticle(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Opciones</th>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Precio Venta</th>
+                                            <th>Stock</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- :key indica la llave principal 
+                                            tabla dinamica-->
+                                        <tr v-for="article in arrayArticle" :key="article.id">
+                                            <td>
+                                                <button type="button" @click="addDetailModal(article)" class="btn btn-success btn-sm">
+                                                  <i class="icon-check"></i>
+                                                </button>
+                                            </td>
+                                            <td v-text="article.code"></td>
+                                            <td v-text="article.name"></td>
+                                            <td v-text="article.name_category"></td>
+                                            <td v-text="article.price"></td>
+                                            <td v-text="article.stock"></td>
+                                            <td>
+                                                <div v-if="article.condition">
+                                                <span class="badge badge-success">Activo</span>
+                                                </div>
+                                                <div v-else>
+                                                <span class="badge badge-danger">Desactivado</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- fin de tabla dinamica -->   
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="closemodal()">Cerrar</button>
@@ -302,6 +354,8 @@ import vSelect from 'vue-select';
                 offset : 3,
                 criterio : 'num_voucher',
                 buscar : '',
+                criterioA: 'name',
+                buscarA: '',
                 arrayArticle: [],
                 idarticle: 0,
                 code: '',
@@ -449,6 +503,20 @@ import vSelect from 'vue-select';
                         me.price=0;
                         } 
                 }    
+            },
+            addDetailModal(data = []){
+
+            },
+            listArticle(buscar,criterio){
+                let me=this;
+                var url='/article/listArticle?buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayArticle = respuesta.articles.data;
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
             },
             registerPerson(){
                 if(this.validatePerson()){
