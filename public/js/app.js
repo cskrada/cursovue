@@ -43934,6 +43934,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43967,7 +43968,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             offset: 3,
             criterio: 'num_voucher',
-            buscar: ''
+            buscar: '',
+            arrayArticle: [],
+            idarticle: 0,
+            code: '',
+            article: '',
+            price: 0,
+            quantity: 0
         };
     },
 
@@ -44031,6 +44038,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var me = this;
             me.loading = true;
             me.idprovider = val1.id;
+        },
+        searchArticle: function searchArticle() {
+            var me = this;
+            var url = '/article/searchArticle?filtro=' + me.code;
+
+            axios.get(url).then(function (response) {
+                var respuesta = response.data;
+                me.arrayArticle = respuesta.articles;
+
+                if (me.arrayArticle.length > 0) {
+                    me.article = me.arrayArticle[0]['name'];
+                    me.idarticle = me.arrayArticle[0]['id'];
+                } else {
+                    me.article = 'No existe artículo';
+                    me.idarticle = 0;
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         changePage: function changePage(page, buscar, criterio) {
             var me = this;
@@ -44776,8 +44802,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.idarticle,
-                                expression: "idarticle"
+                                value: _vm.code,
+                                expression: "code"
                               }
                             ],
                             staticClass: "form-control",
@@ -44785,20 +44811,57 @@ var render = function() {
                               type: "text",
                               placeholder: "Ingrese Artículo"
                             },
-                            domProps: { value: _vm.idarticle },
+                            domProps: { value: _vm.code },
                             on: {
+                              keyup: function($event) {
+                                if (
+                                  !("button" in $event) &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                _vm.searchArticle()
+                              },
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.idarticle = $event.target.value
+                                _vm.code = $event.target.value
                               }
                             }
                           }),
                           _vm._v(" "),
                           _c("button", { staticClass: "btn btn-primary" }, [
                             _vm._v("...")
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.article,
+                                expression: "article"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.article },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.article = $event.target.value
+                              }
+                            }
+                          })
                         ])
                       ])
                     ]),

@@ -141,8 +141,9 @@
                                 <div class="form-group">
                                     <label>Artículo</label>
                                     <div class="form-inline">
-                                        <input type="text" class="form-control" v-model="idarticle" placeholder="Ingrese Artículo">
+                                        <input type="text" class="form-control" v-model="code" @keyup.enter="searchArticle()"placeholder="Ingrese Artículo">
                                         <button class="btn btn-primary">...</button>
+                                        <input type="text" readonly class="form-control" v-model="article">
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +312,13 @@ import vSelect from 'vue-select';
                 },
                 offset : 3,
                 criterio : 'num_voucher',
-                buscar : ''
+                buscar : '',
+                arrayArticle: [],
+                idarticle: 0,
+                code: '',
+                article: '',
+                price: 0,
+                quantity: 0
             } 
         },
         components: {
@@ -376,6 +383,27 @@ import vSelect from 'vue-select';
                 let me = this;
                 me.loading = true;
                 me.idprovider = val1.id;
+            },
+            searchArticle(){
+                let me = this;
+                var url = '/article/searchArticle?filtro=' + me.code;
+
+                axios.get(url).then(function (response){
+                    var respuesta = response.data;
+                    me.arrayArticle = respuesta.articles;
+
+                    if (me.arrayArticle.length>0){
+                        me.article = me.arrayArticle[0]['name'];
+                        me.idarticle = me.arrayArticle[0]['id'];
+                    }
+                    else{
+                        me.article = 'No existe artículo';
+                        me.idarticle = 0;
+                    }
+                })
+                .catch(function (error){
+                    console.log(error);
+                });
             },
             changePage(page,buscar,criterio){
                 let me = this;
