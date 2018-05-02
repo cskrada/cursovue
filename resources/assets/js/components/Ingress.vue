@@ -161,7 +161,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <button class="btn btn-success form-control btnagregar">
+                                    <button @click="addDetail()" class="btn btn-success form-control btnagregar">
                                         <i class="icon-plus"></i>
                                     </button>
                                 </div>
@@ -177,43 +177,23 @@
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody v-if="arrayDetail.length">
+                                        <tr v-for="detail in arrayDetail" :key="detail.id">
                                             <td>
                                                 <button type="button" class="btn btn-danger btn-sm">
                                                     <i class="icon-close"></i>
                                                 </button>
                                             </td>
-                                            <td>
-                                                Artículo n
+                                            <td v-text="detail.article">
                                             </td>
                                             <td>
-                                                <input type="number" value="3" class="form-control">
+                                                <input v-model="detail.price" type="number" value="3" class="form-control">
                                             </td>
                                             <td>
-                                                <input type="number" value="2" class="form-control">
+                                                <input v-model="detail.quantity" type="number" value="2" class="form-control">
                                             </td>
                                             <td>
-                                                $ 6.00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    <i class="icon-close"></i>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                Artículo n
-                                            </td>
-                                            <td>
-                                                <input type="number" value="3" class="form-control">
-                                            </td>
-                                            <td>
-                                                <input type="number" value="2" class="form-control">
-                                            </td>
-                                            <td>
-                                                $ 6.00
+                                                {{detail.price*detail.quantity}}
                                             </td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
@@ -233,6 +213,13 @@
                                                 <strong>Total Neto:</strong>
                                             </td>
                                             <td>$ 6</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr>
+                                            <td colspan="5">
+                                                No hay artículos agregados
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -411,6 +398,15 @@ import vSelect from 'vue-select';
                 me.pagination.current_page = page;
                 //envia la peticion para visualizar la data de esa pagina
                 me.listIngress(page,buscar,criterio);
+            },
+            addDetail(){
+                let me = this;
+                me.arrayDetail.push({
+                    idarticle: me.idarticle,
+                    article: me.article,
+                    quantity: me.quantity,
+                    price: me.price
+                });
             },
             registerPerson(){
                 if(this.validatePerson()){
