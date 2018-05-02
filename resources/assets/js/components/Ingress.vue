@@ -533,8 +533,8 @@ import vSelect from 'vue-select';
                     console.log(error);
                   });
             },
-            registerPerson(){
-                if(this.validatePerson()){
+            registerIngress(){
+                if(this.validateIngress()){
                     return;
                 }
 
@@ -584,16 +584,16 @@ import vSelect from 'vue-select';
                     console.log(error);
                 });
             },
-            validatePerson(){
-                this.errorPerson = 0;
-                this.errorShowMssgPerson = [];
+            validateIngress(){
+                this.errorIngress = 0;
+                this.errorShowMssgIngress = [];
 
                 if (!this.name) this.errorShowMssgPerson.push("el nombre de la persona no puede estar vacio");
                 if (!this.user) this.errorShowMssgPerson.push("el nombre de usuario no puede estar vacio");
                 if (!this.password) this.errorShowMssgPerson.push("el password no puede estar vacio");
                 if (this.idrole == 0) this.errorShowMssgPerson.push("Debes seleccionar un rol para el usuario");
 
-                if (this.errorShowMssgPerson.length) this.errorPerson = 1;
+                if (this.errorShowMssgIngress.length) this.errorIngress = 1;
 
                 return this.errorPerson;
             },
