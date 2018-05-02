@@ -40,6 +40,28 @@ class ArticleController extends Controller
         ];
     }
 
+    public function listArticle(Request $request){
+    
+        //if (!$request->ajax()) return redirect('/');
+ 
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+         
+        if ($buscar==''){
+            $articles = Article::join('categories','articles.idcategory','=','categories.id')
+            ->select('articles.id','articles.idcategory','articles.code','articles.name','categories.name as name_category','articles.price','articles.stock','articles.description','articles.condition')
+            ->orderBy('articles.id', 'desc')->paginate(10);
+        }
+        else{
+            $articles = Article::join('categories','articles.idcategory','=','categories.id')
+            ->select('articles.id','articles.idcategory','articles.code','articles.name','categories.name as name_category','articles.price','articles.stock','articles.description','articles.condition')
+            ->where('articles.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('articles.id', 'desc')->paginate(10);
+        }
+ 
+        return ['articles' => $articles];
+    }
+
     public function searchArticle(Request $request){
         if (!$request->ajax()) return redirect('/');
 
