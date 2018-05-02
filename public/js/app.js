@@ -44172,64 +44172,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         closemodal: function closemodal() {
             this.modal = 0;
             this.titlemodal = '';
-            this.name = '';
-            this.type_document = 'DNI';
-            this.num_document = '';
-            this.address = '';
-            this.phone = '';
-            this.email = '';
-            this.user = '';
-            this.password = '';
-            this.idrole = 0;
-            this.errorPerson = 0;
         },
 
         // se crea un metodo de abrir modal donde se le pasa tres parametros
-        openmodal: function openmodal(modelo, accion) {
-            var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-            this.selectRole();
-            switch (modelo) {
-                case "person":
-                    {
-                        switch (accion) {
-                            case "register":
-                                {
-                                    this.modal = 1;
-                                    this.titlemodal = "Registrar Usuario";
-                                    this.name = '';
-                                    this.type_document = 'DNI';
-                                    this.num_document = '';
-                                    this.address = '';
-                                    this.phone = '';
-                                    this.email = '';
-                                    this.user = '';
-                                    this.password = '';
-                                    this.idrole = 0;
-                                    this.typeaction = 1;
-                                    break;
-                                }
-                            case "update":
-                                {
-                                    //console.log(data);
-                                    this.modal = 1;
-                                    this.titlemodal = "Actualizar Usuario";
-                                    this.typeaction = 2;
-                                    this.person_id = data['id'];
-                                    this.name = data['name'];
-                                    this.type_document = data['type_document'];
-                                    this.num_document = data['num_document'];
-                                    this.address = data['address'];
-                                    this.phone = data['phone'];
-                                    this.email = data['email'];
-                                    this.user = data['user'];
-                                    this.password = data['password'];
-                                    this.idrole = data['idrole'];
-                                    break;
-                                }
-                        }
-                    }
-            }
+        openmodal: function openmodal() {
+            this.modal = 1;
+            this.titlemodal = "Seleccione uno o varios artículos";
         },
         desactiveUser: function desactiveUser(id) {
             var _this = this;
@@ -44889,9 +44837,18 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c("button", { staticClass: "btn btn-primary" }, [
-                            _vm._v("...")
-                          ]),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              on: {
+                                click: function($event) {
+                                  _vm.openmodal()
+                                }
+                              }
+                            },
+                            [_vm._v("...")]
+                          ),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
