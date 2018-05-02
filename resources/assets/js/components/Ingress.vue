@@ -411,6 +411,11 @@ import vSelect from 'vue-select';
                         quantity: me.quantity,
                         price: me.price
                     });
+                    me.code="";
+                    me.idarticle=0;
+                    me.article="";
+                    me.quantity=0;
+                    me.price=0;
                 }
                 
             },
