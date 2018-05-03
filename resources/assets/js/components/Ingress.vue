@@ -249,17 +249,17 @@
                         <div class="form-group row border">
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <label for="">Proveedor(*)</label>
+                                    <label for="">Proveedor</label>
                                     <p v-text="provider"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="">Impuesto(*)</label>
+                                <label for="">Impuesto</label>
                                 <p v-text="tax"></p>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo de Comprobante(*)</label>
+                                    <label>Tipo de Comprobante</label>
                                     <p v-text="type_voucher"></p>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Número Comprobante(*)</label>
+                                    <label>Número Comprobante</label>
                                     <p v-text="num_voucher"></p>
                                 </div>
                             </div>
@@ -298,27 +298,27 @@
                                             </td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right">
+                                            <td colspan="3" align="right">
                                                 <strong>Total Parcial:</strong>
                                             </td>
                                             <td>$ {{totalPartial=(total-totalTax).toFixed(2)}}</td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right">
+                                            <td colspan="3" align="right">
                                                 <strong>Total Impuesto:</strong>
                                             </td>
-                                            <td>$ {{totalTax=((total*tax)/(1+tax)).toFixed(2)}}</td>
+                                            <td>$ {{totalTax=((total*tax)).toFixed(2)}}</td>
                                         </tr>
                                         <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right">
+                                            <td colspan="3" align="right">
                                                 <strong>Total Neto:</strong>
                                             </td>
-                                            <td>$ {{total=calculateTotal}}</td>
+                                            <td>$ {{total}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="4">
                                                 No hay artículos agregados
                                             </td>
                                         </tr>
@@ -729,7 +729,37 @@ import vSelect from 'vue-select';
                 this.listado=1;
             },
             seeIngress(id){
-                this.listado=2;
+                let me = this;
+                me.listado=2;
+
+                //Obtener los datos del ingreso
+                    var arrayIngressT=[];
+                    var url='/ingress/getHeader?id=' + id;
+
+                    axios.get(url).then(function (response) {
+                        var respuesta= response.data;
+                        arrayIngressT = respuesta.ingress;
+
+                        me.provider = arrayIngressT[0]['name'];
+                        me.type_voucher = arrayIngressT[0]['type_voucher'];
+                        me.serie_voucher = arrayIngressT[0]['serie_voucher'];
+                        me.tax = arrayIngressT[0]['tax'];
+                        me.total = arrayIngressT[0]['total'];
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+
+                //Obtener los datos de los detalles
+                    var urld='/ingress/getDetails?id=' + id;
+
+                    axios.get(urld).then(function (response) {
+                        var respuesta= response.data;
+                        me.arrayDetail = respuesta.details;
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
             },
             closemodal(){
                 this.modal=0;

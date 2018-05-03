@@ -52,6 +52,8 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/ingress', 'IngressController@index');
 		Route::post('/ingress/registrar', 'IngressController@store');
 		Route::put('/ingress/desactivar', 'IngressController@desactivar');
+		Route::get('/ingress/getHeader', 'IngressController@getHeader');
+		Route::get('/ingress/getDetails', 'IngressController@getDetails');
 	});
 
 	Route::group(['middleware'=>['Vendedor']],function(){
@@ -91,6 +93,8 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/ingress', 'IngressController@index');
 		Route::post('/ingress/registrar', 'IngressController@store');
 		Route::put('/ingress/desactivar', 'IngressController@desactivar');
+		Route::get('/ingress/getHeader', 'IngressController@getHeader');
+		Route::get('/ingress/getDetails', 'IngressController@getDetails');
 
 		//Rutas para Cliente
 		Route::get('/client', 'ClientController@index');

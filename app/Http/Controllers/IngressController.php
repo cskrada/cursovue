@@ -48,6 +48,33 @@ class IngressController extends Controller
 	    ];
     }
 
+    public function getHeader(Request $request){
+      if (!$request->ajax()) return redirect('/');
+
+      $id = $request->id;
+       $ingress = Ingress::join('persons','income.idprovider','=','persons.id')
+        ->join('users','income.iduser','=','users.id')
+        ->select('income.id','income.type_voucher','income.serie_voucher',
+        'income.num_voucher','income.fecha_hora','income.tax','income.total',
+        'income.status','persons.name','users.user')
+        ->where('income.id','=',$id)
+        ->orderBy('income.id', 'desc')->take(1)->get();
+
+      return ['ingress'=> $ingress];
+    }
+
+    public function getDetails(Request $request){
+      if (!$request->ajax()) return redirect('/');
+
+        $id = $request->id;
+        $details = IncomeDetail::join('articles','income_detail.idarticle','=','articles.id')
+        ->select('income_detail.quantity','income_detail.price','articles.name as article')
+        ->where('income_detail.idingress','=',$id)
+        ->orderBy('income_detail.id', 'desc')->get();
+        
+        return ['details' => $details];
+    }
+
     public function store (Request $request){
         if (!$request->ajax()) return redirect('/');
 
