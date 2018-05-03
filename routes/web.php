@@ -62,6 +62,9 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/client', 'ClientController@index');
 		Route::post('/client/registrar', 'ClientController@store');
 		Route::put('/client/actualizar', 'ClientController@update');
+
+		//Rutas para Ventas
+		Route::get('/sale', 'SaleController@index');
 	});	
 
 	Route::group(['middleware'=>['Administrador']],function(){
@@ -100,6 +103,9 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/client', 'ClientController@index');
 		Route::post('/client/registrar', 'ClientController@store');
 		Route::put('/client/actualizar', 'ClientController@update');
+
+		//Rutas para Ventas
+		Route::get('/sale', 'SaleController@index');
 
 		//Rutas para Los Roles
 		Route::get('/role', 'RoleController@index');
