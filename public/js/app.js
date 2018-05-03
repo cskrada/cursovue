@@ -44199,20 +44199,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var me = this;
 
-            axios.post('/user/registrar', {
-                'name': this.name,
-                'type_document': this.type_document,
-                'num_document': this.num_document,
-                'address': this.address,
-                'phone': this.phone,
-                'email': this.email,
-                'user': this.user,
-                'password': this.password,
-                'idrole': this.idrole
+            axios.post('/ingress/registrar', {
+                'idprovider': this.idprovider,
+                'type_voucher': this.type_voucher,
+                'serie_voucher': this.serie_voucher,
+                'num_voucher': this.num_voucher,
+                'tax': this.tax,
+                'total': this.total,
+                'data': this.arrayDetail
 
             }).then(function (response) {
-                me.closemodal();
-                me.listPerson(1, '', 'name');
+                me.listado = 1;
+                me.listIngress(1, '', 'num_voucher');
+                me.idprovider = 0;
+                me.type_voucher = 'BOLETA';
+                me.serie_voucher = '';
+                me.num_voucher = '';
+                me.tax = 0.18;
+                me.total = 0.0;
+                me.idarticle = 0;
+                me.article = '';
+                me.quantity = 0;
+                me.price = 0;
+                me.arrayDetail = [];
             }).catch(function (error) {
                 console.log(error);
             });
@@ -44257,7 +44266,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.errorIngress;
         },
         showDetail: function showDetail() {
-            this.listado = 0;
+            var me = this;
+            me.listado = 0;
+            me.idprovider = 0;
+            me.type_voucher = 'BOLETA';
+            me.serie_voucher = '';
+            me.num_voucher = '';
+            me.tax = 0.18;
+            me.total = 0.0;
+            me.idarticle = 0;
+            me.article = '';
+            me.quantity = 0;
+            me.price = 0;
+            me.arrayDetail = [];
         },
         hideDetail: function hideDetail() {
             this.listado = 1;
