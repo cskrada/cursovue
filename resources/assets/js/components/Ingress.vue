@@ -669,7 +669,7 @@ import vSelect from 'vue-select';
                             }).then(function (response) {
                                 me.listIngress(1,'','num_voucher');
                                 swal(
-                                    'Desactivado',
+                                    'Anulado',
                                     'El ingreso ha sido anulado con exito.',
                                     'success'
                                     )

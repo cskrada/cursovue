@@ -44318,7 +44318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'id': id
                     }).then(function (response) {
                         me.listIngress(1, '', 'num_voucher');
-                        swal('Desactivado', 'El ingreso ha sido anulado con exito.', 'success');
+                        swal('Anulado', 'El ingreso ha sido anulado con exito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
