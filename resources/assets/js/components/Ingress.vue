@@ -646,9 +646,9 @@ import vSelect from 'vue-select';
                 this.modal = 1;
                 this.titlemodal = "Seleccione uno o varios artículos";
             },
-            desactiveUser(id){
+            desactiveIngress(id){
                 swal({
-                      title: 'Esta seguro de desactivar este usuario?',
+                      title: 'Esta seguro de anular este ingreso?',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',
@@ -664,53 +664,13 @@ import vSelect from 'vue-select';
 
                         let me = this;
 
-                            axios.put('/user/desactivar', {
+                            axios.put('/ingress/desactivar', {
                                 'id': id
                             }).then(function (response) {
-                                me.listPerson(1,'','name');
+                                me.listIngress(1,'','num_voucher');
                                 swal(
                                     'Desactivado',
-                                    'El usuario ha sido desactivado con exito.',
-                                    'success'
-                                    )
-                            }).catch(function(error)
-                            {
-                                console.log(error);
-                            });
-                        
-                      } else if (
-                        // Read more about handling dismissals
-                        result.dismiss === swal.DismissReason.cancel
-                      ) {
-                       
-                      }
-                    })
-            },
-            activeUser(id){
-                swal({
-                      title: 'Esta seguro de activar este usuario',
-                      type: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Aceptar',
-                      cancelButtonText: 'Cancelar',
-                      confirmButtonClass: 'btn btn-success',
-                      cancelButtonClass: 'btn btn-danger',
-                      buttonsStyling: false,
-                      reverseButtons: true
-                    }).then((result) => {
-                      if (result.value) {
-
-                        let me = this;
-
-                            axios.put('/user/activar', {
-                                'id': id
-                            }).then(function (response) {
-                                me.listPerson(1,'','name');
-                                swal(
-                                    'Activado',
-                                    'El usuario ha sido activado con exito.',
+                                    'El ingreso ha sido anulado con exito.',
                                     'success'
                                     )
                             }).catch(function(error)
