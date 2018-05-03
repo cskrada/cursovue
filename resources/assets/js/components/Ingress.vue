@@ -14,7 +14,7 @@
                         </button>
                     </div>
                     <!-- Listado -->
-                    <template v-if="listado">
+                    <template v-if="listado==1">
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-md-6">
@@ -50,7 +50,7 @@
                                         tabla dinamica-->
                                     <tr v-for="ingress in arrayIngress" :key="ingress.id">
                                         <td>
-                                            <button type="button" @click="openmodal('ingress','update',ingress)" class="btn btn-success btn-sm">
+                                            <button type="button" @click="seeIngress(ingress.id)" class="btn btn-success btn-sm">
                                               <i class="icon-eye"></i>
                                             </button> &nbsp;
                                             <template v-if="ingress.status=='Registrado'">
@@ -91,7 +91,7 @@
                     </template>
                     <!-- Fin Listado -->
                     <!-- Detalle -->
-                    <template v-else>
+                    <template v-else-if="listado==0">
                     <div class="card-body">
                         <div class="form-group row border">
                             <div class="col-md-9">
@@ -243,6 +243,97 @@
                     </div>
                     </template>
                     <!-- Fin Detalle -->
+                    <!-- ver Ingreso -->
+                    <template v-else-if="listado==2">
+                    <div class="card-body">
+                        <div class="form-group row border">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="">Proveedor(*)</label>
+                                    <p v-text="provider"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">Impuesto(*)</label>
+                                <p v-text="tax"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipo de Comprobante(*)</label>
+                                    <p v-text="type_voucher"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Serie Comprobante</label>
+                                    <p v-text="serie_voucher"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Número Comprobante(*)</label>
+                                    <p v-text="num_voucher"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row border">
+                            <div class="table-responsive col-md-12">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                        <th>Artículo</th>   
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal</th>
+                                    </thead>
+                                    <tbody v-if="arrayDetail.length">
+                                        <tr v-for="detail in arrayDetail" :key="detail.id">
+                                            <td v-text="detail.article">
+                                            </td>
+                                            <td v-text="detail.price">
+                                            </td>
+                                            <td v-text="detail.quantity">
+                                            </td>
+                                            <td>
+                                                {{detail.price*detail.quantity}}
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Parcial:</strong>
+                                            </td>
+                                            <td>$ {{totalPartial=(total-totalTax).toFixed(2)}}</td>
+                                        </tr>
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Impuesto:</strong>
+                                            </td>
+                                            <td>$ {{totalTax=((total*tax)/(1+tax)).toFixed(2)}}</td>
+                                        </tr>
+                                        <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right">
+                                                <strong>Total Neto:</strong>
+                                            </td>
+                                            <td>$ {{total=calculateTotal}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr>
+                                            <td colspan="5">
+                                                No hay artículos agregados
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary" @click="hideDetail() ">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    </template>
+                    <!-- fin ver Ingreso -->
 
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
@@ -334,6 +425,7 @@ import vSelect from 'vue-select';
             return{
                 ingress_id: 0,
                 idprovider:0,
+                provider: '',
                 name :'',
                 type_voucher : 'BOLETA',
                 serie_voucher : '',
@@ -635,6 +727,9 @@ import vSelect from 'vue-select';
             },
             hideDetail(){
                 this.listado=1;
+            },
+            seeIngress(id){
+                this.listado=2;
             },
             closemodal(){
                 this.modal=0;
