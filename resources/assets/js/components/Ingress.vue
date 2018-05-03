@@ -135,6 +135,15 @@
                                     <input type="text" class="form-control" v-model="num_voucher" placeholder="000xx">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div v-show="errorIngress" class="form-group row div-error">
+                                    <div class="text-center text-error">
+                                        <div v-for="error in errorShowMssgIngress" :key="error" v-text="error">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group row border">
                             <div class="col-md-6">
@@ -588,14 +597,16 @@ import vSelect from 'vue-select';
                 this.errorIngress = 0;
                 this.errorShowMssgIngress = [];
 
-                if (!this.name) this.errorShowMssgPerson.push("el nombre de la persona no puede estar vacio");
-                if (!this.user) this.errorShowMssgPerson.push("el nombre de usuario no puede estar vacio");
-                if (!this.password) this.errorShowMssgPerson.push("el password no puede estar vacio");
-                if (this.idrole == 0) this.errorShowMssgPerson.push("Debes seleccionar un rol para el usuario");
+                if (this.idprovider==0) this.errorShowMssgIngress.push("Seleccione un proveedor");
+                if (this.type_voucher==0) this.errorShowMssgIngress.push("Seleccione el comprobante");
+                if (!this.num_voucher) this.errorShowMssgIngress.push("Seleccione el número de comprobante");
+                if (!this.tax) this.errorShowMssgIngress.push("Ingrese el impuesto de compra");
+                if (this.arrayDetail.length<=0) this.errorShowMssgIngress.push("Ingrese detalles");
+
 
                 if (this.errorShowMssgIngress.length) this.errorIngress = 1;
 
-                return this.errorPerson;
+                return this.errorIngress;
             },
             showDetail(){
                 this.listado=0;

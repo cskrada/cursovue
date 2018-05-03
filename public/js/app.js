@@ -43974,6 +43974,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44183,8 +44192,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        registerPerson: function registerPerson() {
-            if (this.validatePerson()) {
+        registerIngress: function registerIngress() {
+            if (this.validateIngress()) {
                 return;
             }
 
@@ -44233,18 +44242,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        validatePerson: function validatePerson() {
-            this.errorPerson = 0;
-            this.errorShowMssgPerson = [];
+        validateIngress: function validateIngress() {
+            this.errorIngress = 0;
+            this.errorShowMssgIngress = [];
 
-            if (!this.name) this.errorShowMssgPerson.push("el nombre de la persona no puede estar vacio");
-            if (!this.user) this.errorShowMssgPerson.push("el nombre de usuario no puede estar vacio");
-            if (!this.password) this.errorShowMssgPerson.push("el password no puede estar vacio");
-            if (this.idrole == 0) this.errorShowMssgPerson.push("Debes seleccionar un rol para el usuario");
+            if (this.idprovider == 0) this.errorShowMssgIngress.push("Seleccione un proveedor");
+            if (this.type_voucher == 0) this.errorShowMssgIngress.push("Seleccione el comprobante");
+            if (!this.num_voucher) this.errorShowMssgIngress.push("Seleccione el número de comprobante");
+            if (!this.tax) this.errorShowMssgIngress.push("Ingrese el impuesto de compra");
+            if (this.arrayDetail.length <= 0) this.errorShowMssgIngress.push("Ingrese detalles");
 
-            if (this.errorShowMssgPerson.length) this.errorPerson = 1;
+            if (this.errorShowMssgIngress.length) this.errorIngress = 1;
 
-            return this.errorPerson;
+            return this.errorIngress;
         },
         showDetail: function showDetail() {
             this.listado = 0;
@@ -44849,6 +44859,35 @@ var render = function() {
                           }
                         })
                       ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.errorIngress,
+                              expression: "errorIngress"
+                            }
+                          ],
+                          staticClass: "form-group row div-error"
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "text-center text-error" },
+                            _vm._l(_vm.errorShowMssgIngress, function(error) {
+                              return _c("div", {
+                                key: error,
+                                domProps: { textContent: _vm._s(error) }
+                              })
+                            })
+                          )
+                        ]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
